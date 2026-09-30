@@ -1,0 +1,5 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+customer_system.db

@@ -1,0 +1,2776 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Persona — Customer Segmentation & Recommendation System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #12142B;
+      --bg-alt: #191C3A;
+      --surface: #1E2142;
+      --surface-2: #272B57;
+      --border: #33376A;
+      --text: #F1F1FB;
+      --text-dim: #9A9FC7;
+      --text-faint: #6D72A3;
+      --accent: #7C83FD;
+      --accent-dim: #565CBD;
+      --danger: #FF6B6B;
+
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    /* ---------- Ambient background canvas ---------- */
+    #bgCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .app {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---------- Top nav ---------- */
+    .topnav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px clamp(20px, 5vw, 64px);
+      backdrop-filter: blur(6px);
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: conic-gradient(#FF6B6B, #4ECDC4, #FFD166, #A78BFA, #06D6A0, #FF6B6B);
+      box-shadow: 0 0 0 3px rgba(124, 131, 253, 0.15);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+    }
+
+    .nav-links button {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 100px;
+      transition: color .2s ease, background .2s ease;
+      position: relative;
+    }
+
+    .nav-links button:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .nav-links button.active {
+      color: var(--text);
+      background: var(--surface-2);
+    }
+
+    .nav-links button:focus-visible,
+    .btn:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-chip {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-chip.show {
+      display: flex;
+    }
+
+    .user-chip .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #06D6A0;
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 8px 20px -8px rgba(124, 131, 253, 0.6);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -8px rgba(124, 131, 253, 0.75);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-ghost {
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      background: var(--surface);
+      transform: translateY(-2px);
+    }
+
+    .btn-sm {
+      padding: 9px 16px;
+      font-size: 0.82rem;
+    }
+
+    /* ---------- Screens ---------- */
+    main {
+      flex: 1;
+      display: flex;
+    }
+
+    .screen {
+      display: none;
+      width: 100%;
+      animation: fadeIn .5s ease both;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ---------- Landing ---------- */
+    #landing .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: clamp(40px, 8vw, 90px) clamp(20px, 5vw, 64px) 40px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    .eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulseDot 1.6s infinite;
+    }
+
+    @keyframes pulseDot {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: .3;
+      }
+    }
+
+    h1.hero-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 22px;
+    }
+
+    h1.hero-title .accent-word {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      color: var(--text-dim);
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      max-width: 620px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+
+    .legend {
+      display: flex;
+      gap: 22px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .how-it-works {
+      max-width: 1100px;
+      margin: 20px auto 80px;
+      padding: 0 clamp(20px, 5vw, 64px);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .step-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-dim);
+    }
+
+    .step-num {
+      font-family: var(--font-mono);
+      color: var(--accent);
+      font-size: 0.78rem;
+      margin-bottom: 10px;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .step-desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 860px) {
+      .how-it-works {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .how-it-works {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---------- Auth ---------- */
+    .auth-wrap {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.5);
+    }
+
+    .tabs {
+      display: flex;
+      background: var(--bg-alt);
+      border-radius: 100px;
+      padding: 4px;
+      margin-bottom: 26px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      padding: 9px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all .2s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin-bottom: 7px;
+      font-family: var(--font-mono);
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 11px 14px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(124, 131, 253, 0.18);
+      outline: none;
+    }
+
+    .form-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .form-sub {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      margin-bottom: 24px;
+    }
+
+    .form-error {
+      display: none;
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.35);
+      color: #FF9B9B;
+      font-size: 0.82rem;
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+    }
+
+    .form-error.show {
+      display: block;
+    }
+
+    .form-success {
+      display: none;
+      background: rgba(6, 214, 160, 0.1);
+      border: 1px solid rgba(6, 214, 160, 0.35);
+      color: #6EE7C4;
+      font-size: 0.82rem;
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+    }
+
+    .form-success.show {
+      display: block;
+    }
+
+    /* ---------- Predict form ---------- */
+    .predict-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 50px 20px 80px;
+    }
+
+    .slider-row {
+      margin-bottom: 24px;
+    }
+
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .slider-label span:first-child {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    .slider-value {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 100px;
+      background: var(--surface-2);
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg);
+      cursor: pointer;
+      box-shadow: 0 0 0 4px rgba(124, 131, 253, 0.2);
+      transition: transform .15s ease;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg);
+      cursor: pointer;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 520px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---------- Processing ---------- */
+    #processing .proc-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .proc-canvas-wrap {
+      width: 260px;
+      height: 260px;
+      position: relative;
+      margin-bottom: 32px;
+    }
+
+    #procCanvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    .proc-text {
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      font-size: 0.95rem;
+    }
+
+    .proc-text .ellipsis::after {
+      content: '.';
+      animation: ellipsis 1.2s infinite;
+    }
+
+    @keyframes ellipsis {
+      0% {
+        content: '.';
+      }
+
+      33% {
+        content: '..';
+      }
+
+      66% {
+        content: '...';
+      }
+
+      100% {
+        content: '.';
+      }
+    }
+
+    .proc-steps {
+      margin-top: 18px;
+      font-size: 0.78rem;
+      color: var(--text-faint);
+      font-family: var(--font-mono);
+    }
+
+    .proc-steps span {
+      display: block;
+      opacity: 0;
+      animation: stepIn .4s ease forwards;
+    }
+
+    .proc-steps span:nth-child(1) {
+      animation-delay: .2s;
+    }
+
+    .proc-steps span:nth-child(2) {
+      animation-delay: 1.1s;
+    }
+
+    .proc-steps span:nth-child(3) {
+      animation-delay: 2.0s;
+    }
+
+    @keyframes stepIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: .8;
+        transform: translateY(0);
+      }
+    }
+
+    /* ---------- Result ---------- */
+    .result-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 50px 20px 90px;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .result-wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .map-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      position: sticky;
+      top: 20px;
+    }
+
+    .map-card-title {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin-bottom: 14px;
+    }
+
+    .cluster-map {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 0.85;
+      background: var(--bg-alt);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .map-dot {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.55;
+    }
+
+    .you-dot {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
+      transition: left 1.4s cubic-bezier(.22, 1, .36, 1), top 1.4s cubic-bezier(.22, 1, .36, 1);
+      z-index: 3;
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6);
+    }
+
+    .you-dot.settled {
+      animation: pulseRing 1.6s ease-out 1;
+    }
+
+    @keyframes pulseRing {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.55);
+      }
+
+      70% {
+        box-shadow: 0 0 0 24px rgba(255, 255, 255, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+      }
+    }
+
+    .result-main {
+      opacity: 0;
+      animation: fadeIn .5s ease .1s forwards;
+    }
+
+    .cluster-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      padding: 6px 12px;
+      border-radius: 100px;
+      margin-bottom: 18px;
+      border: 1px solid var(--border);
+    }
+
+    .cluster-tag .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .persona-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .persona-desc {
+      color: var(--text-dim);
+      line-height: 1.65;
+      margin-bottom: 28px;
+      max-width: 520px;
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .stat {}
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-faint);
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .products-title {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 420px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .product-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: cardIn .45s ease forwards;
+    }
+
+    .product-card:nth-child(1) {
+      animation-delay: .1s;
+    }
+
+    .product-card:nth-child(2) {
+      animation-delay: .2s;
+    }
+
+    .product-card:nth-child(3) {
+      animation-delay: .3s;
+    }
+
+    .product-card:nth-child(4) {
+      animation-delay: .4s;
+    }
+
+    .product-card:nth-child(5) {
+      animation-delay: .5s;
+    }
+
+    .product-card:nth-child(6) {
+      animation-delay: .6s;
+    }
+
+    @keyframes cardIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .product-card:hover {
+      border-color: var(--accent-dim);
+      transform: translateY(-3px);
+    }
+
+    .product-card {
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .product-icon {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .product-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .product-price {
+      font-family: var(--font-mono);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .product-reason {
+      color: var(--text-faint);
+      font-size: 0.74rem;
+      line-height: 1.4;
+      margin-top: 6px;
+    }
+
+    .more-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 32px;
+    }
+
+    .more-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+    }
+
+    .more-item-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .more-item-price {
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ---------- History ---------- */
+    .history-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 50px 20px 90px;
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .history-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      opacity: 0;
+      transform: translateX(-8px);
+      animation: rowIn .4s ease forwards;
+      overflow: hidden;
+    }
+
+    .hr-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      cursor: pointer;
+      flex-wrap: wrap;
+      user-select: none;
+    }
+
+    .hr-header:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .hr-chevron {
+      color: var(--text-faint);
+      font-size: 0.75rem;
+      transition: transform .25s ease;
+      margin-left: auto;
+    }
+
+    .history-row.open .hr-chevron {
+      transform: rotate(90deg);
+    }
+
+    .hr-products {
+      display: none;
+      padding: 4px 18px 16px 18px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .history-row.open .hr-products {
+      display: flex;
+    }
+
+    .product-tag {
+      font-size: 0.76rem;
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 100px;
+    }
+
+    .history-row:nth-child(1) {
+      animation-delay: .05s;
+    }
+
+    .history-row:nth-child(2) {
+      animation-delay: .12s;
+    }
+
+    .history-row:nth-child(3) {
+      animation-delay: .19s;
+    }
+
+    .history-row:nth-child(4) {
+      animation-delay: .26s;
+    }
+
+    .history-row:nth-child(5) {
+      animation-delay: .33s;
+    }
+
+    @keyframes rowIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .hr-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .hr-persona {
+      font-weight: 600;
+      min-width: 150px;
+    }
+
+    .hr-meta {
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      flex: 1;
+    }
+
+    .hr-date {
+      color: var(--text-faint);
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      white-space: nowrap;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-dim);
+    }
+
+    footer {
+      text-align: center;
+      padding: 26px;
+      color: var(--text-faint);
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-top-color: #fff;
+      animation: spin .7s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+    /* ---------- Admin nav button ---------- */
+    .admin-nav-btn {
+      background: rgba(124, 131, 253, 0.12) !important;
+      color: var(--accent) !important;
+      border: 1px solid rgba(124, 131, 253, 0.3) !important;
+    }
+
+    .admin-nav-btn:hover {
+      background: rgba(124, 131, 253, 0.22) !important;
+      color: #fff !important;
+    }
+
+    .admin-nav-btn.active {
+      background: var(--accent) !important;
+      color: #fff !important;
+    }
+
+    /* ---------- Admin dashboard ---------- */
+    .admin-wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 40px 20px 0;
+    }
+
+    .admin-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .admin-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      text-transform: uppercase;
+      border: 1px solid rgba(124, 131, 253, 0.3);
+      padding: 5px 14px;
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+
+    .admin-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .admin-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 560px) {
+      .admin-metrics {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .metric-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 24px;
+      text-align: center;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-dim);
+    }
+
+    .metric-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .metric-value {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .metric-sub {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      margin-top: 8px;
+      font-family: var(--font-mono);
+    }
+
+    .metric-persona-name {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .metric-persona-stats {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    .admin-chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 24px;
+    }
+
+    .admin-chart-title {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    #adminChartCanvas {
+      width: 100%;
+      display: block;
+    }
+
+    .admin-loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    .admin-denied {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .admin-denied-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+
+    .admin-denied-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--danger);
+    }
+
+    .admin-denied-sub {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    /* ---------- Admin sidebar layout ---------- */
+    .admin-layout {
+      display: flex;
+      align-items: flex-start;
+      gap: 28px;
+      padding-bottom: 90px;
+    }
+
+    .admin-sidebar {
+      width: 232px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .admin-sidebar-header {
+      padding: 6px 10px 18px;
+    }
+
+    .admin-side-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 11px 14px;
+      border-radius: 12px;
+      transition: background .18s ease, color .18s ease;
+    }
+
+    .admin-side-link:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+    }
+
+    .admin-side-link.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .admin-side-logout {
+      margin-top: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      color: var(--danger);
+    }
+
+    .admin-side-logout:hover {
+      background: rgba(255, 107, 107, 0.1);
+      color: var(--danger);
+    }
+
+    .admin-main {
+      flex: 1;
+      min-width: 0;
+      padding-top: 4px;
+    }
+
+    .admin-page {
+      display: none;
+    }
+
+    .admin-page.active {
+      display: block;
+      animation: fadeIn .35s ease both;
+    }
+
+    .admin-page-header {
+      margin-bottom: 24px;
+    }
+
+    .admin-page-title {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .admin-page-sub {
+      color: var(--text-dim);
+      font-size: 0.87rem;
+    }
+
+    .admin-overview-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 560px) {
+      .admin-overview-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .admin-layout {
+        flex-direction: column;
+      }
+
+      .admin-sidebar {
+        width: 100%;
+        position: static;
+        flex-direction: row;
+        align-items: center;
+        overflow-x: auto;
+        gap: 4px;
+      }
+
+      .admin-sidebar-header {
+        display: none;
+      }
+
+      #adminNav {
+        display: flex;
+        gap: 4px;
+      }
+
+      .admin-side-link {
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .admin-side-logout {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: none;
+        border-left: 1px solid var(--border);
+        padding-left: 14px;
+        flex-shrink: 0;
+      }
+
+      .admin-main {
+        padding-top: 20px;
+      }
+    }
+
+    /* ---------- New analytics sections ---------- */
+    .admin-metrics-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 700px) {
+      .admin-metrics-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .admin-section-gap {
+      margin-bottom: 28px;
+    }
+
+    /* Products bar chart */
+    #adminProductsCanvas {
+      width: 100%;
+      display: block;
+    }
+
+    /* Persona analysis table */
+    .persona-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    .persona-table th {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .persona-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(51, 55, 106, 0.5);
+      color: var(--text-dim);
+    }
+
+    .persona-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .persona-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .pt-persona-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pt-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .pt-name {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Highlight persona cards */
+    .highlight-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 28px;
+    }
+
+    @media (max-width: 560px) {
+      .highlight-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .highlight-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 26px 24px;
+      text-align: center;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-dim);
+    }
+
+    .highlight-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .highlight-persona {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .highlight-value {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    /* ---------- Business Insights ---------- */
+    .bi-groups {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 560px) {
+      .bi-groups {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .bi-group-title {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .bi-item {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+      margin-bottom: 9px;
+    }
+
+    .bi-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .bi-item strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+
+  <div class="app">
+
+    <nav class="topnav">
+      <div class="logo"><span class="logo-mark"></span>Persona</div>
+      <div class="nav-links" id="navLinks">
+        <button data-nav="landing" class="active">Home</button>
+        <button data-nav="predict">Predict</button>
+        <button data-nav="history">History</button>
+        <button data-nav="admin" class="admin-nav-btn" id="adminNavBtn" style="display:none;">Admin ↗</button>
+      </div>
+      <div class="nav-cta">
+        <span class="user-chip" id="userChip"><span class="dot"></span><span id="userChipName">guest</span></span>
+        <button class="btn btn-ghost btn-sm" id="authBtn" data-nav="auth">Log in</button>
+      </div>
+    </nav>
+
+    <main>
+
+      <!-- LANDING -->
+      <section class="screen active" id="landing">
+        <div class="hero">
+          <!-- <div class="eyebrow"><span class="dot"></span>K-Means Clustering</div> -->
+          <h1 class="hero-title">Every customer belongs<br>to a <span class="accent-word">cluster</span>.</h1>
+          <!-- <p class="hero-sub">Enter a customer's profile and watch the model place them among the people they actually resemble — then get product recommendations built for that group, not the average shopper.</p> -->
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-nav="predict">Run a prediction →</button>
+            <button class="btn btn-ghost" data-nav="history">View history</button>
+          </div>
+          <div class="legend" id="legend"></div>
+        </div>
+
+        <div class="how-it-works">
+          <div class="step-card">
+            <div class="step-num">INPUT</div>
+            <div class="step-title">Profile</div>
+            <div class="step-desc">Age, gender, annual income, and spending score — four signals, no forms to dread.
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">MODEL</div>
+            <div class="step-title">K-Means</div>
+            <div class="step-desc">Trained on historical customers, the model assigns a cluster based on nearest
+              centroid.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">MAPPING</div>
+            <div class="step-title">Persona</div>
+            <div class="step-desc">Each cluster is named and described, based on its real income/spending centroid.
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">OUTPUT</div>
+            <div class="step-title">Recommendations</div>
+            <div class="step-desc">A short list of products curated for that persona's habits, not a generic catalog.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AUTH -->
+      <section class="screen" id="auth">
+        <div class="auth-wrap">
+          <div class="card">
+            <div class="tabs">
+              <button class="tab-btn active" id="tabLogin">Log in</button>
+              <button class="tab-btn" id="tabRegister">Register</button>
+            </div>
+
+            <div id="loginForm">
+              <div class="form-title">Welcome back</div>
+              <div class="form-sub">Log in to run a new prediction.</div>
+              <div class="form-error" id="loginError"></div>
+              <div class="field"><label>Username</label><input type="text" id="loginUsername"
+                  placeholder="e.g. srinithi" /></div>
+              <div class="field"><label>Password</label><input type="password" id="loginPassword"
+                  placeholder="••••••••" /></div>
+              <button class="btn btn-primary" style="width:100%;margin-top:8px;" id="loginSubmit">Log in →</button>
+            </div>
+
+            <div id="registerForm" style="display:none;">
+              <div class="form-title">Create account</div>
+              <div class="form-sub">Takes a few seconds.</div>
+              <div class="form-error" id="registerError"></div>
+              <div class="form-success" id="registerSuccess"></div>
+              <div class="field"><label>Username</label><input type="text" id="regUsername"
+                  placeholder="Choose a username" /></div>
+              <div class="field"><label>Email (optional)</label><input type="email" id="regEmail"
+                  placeholder="you@example.com" /></div>
+              <div class="field"><label>Password</label><input type="password" id="regPassword"
+                  placeholder="Create a password (min 4 chars)" /></div>
+              <button class="btn btn-primary" style="width:100%;margin-top:8px;" id="registerSubmit">Create account
+                →</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PREDICT -->
+      <section class="screen" id="predict">
+        <div class="predict-wrap">
+          <div class="form-title" style="font-size:1.8rem;">Customer profile</div>
+          <div class="form-sub" style="margin-bottom:32px;">These four values are all the model needs.</div>
+          <div class="form-error" id="predictError"></div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label>Age</label>
+              <input type="number" id="inAge" value="27" min="10" max="100" />
+            </div>
+            <div class="field">
+              <label>Gender</label>
+              <select id="inGender">
+                <option>Female</option>
+                <option>Male</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="slider-row">
+            <div class="slider-label"><span>Annual income</span><span class="slider-value" id="incomeVal">₹33.2L</span>
+            </div>
+            <input type="range" id="inIncome" min="1" max="240" value="40" />
+          </div>
+
+          <div class="slider-row">
+            <div class="slider-label"><span>Spending score</span><span class="slider-value" id="spendVal">62</span>
+            </div>
+            <input type="range" id="inSpend" min="1" max="100" value="62" />
+          </div>
+
+          <button class="btn btn-primary" style="width:100%; margin-top:12px;" id="predictSubmit">Predict my cluster
+            →</button>
+        </div>
+      </section>
+
+      <!-- PROCESSING -->
+      <section class="screen" id="processing">
+        <div class="proc-wrap">
+          <div class="proc-canvas-wrap"><canvas id="procCanvas" width="260" height="260"></canvas></div>
+          <div class="proc-text">Analyzing customer profile<span class="ellipsis"></span></div>
+          <div class="proc-steps">
+            <span>→ scaling features</span>
+            <span>→ computing distances to centroids</span>
+            <span>→ assigning nearest cluster</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- RESULT -->
+      <section class="screen" id="result">
+        <div class="result-wrap">
+          <div class="map-card">
+            <div class="map-card-title">CLUSTER MAP — where you landed</div>
+            <div class="cluster-map" id="clusterMap">
+              <div class="you-dot" id="youDot"></div>
+            </div>
+          </div>
+
+          <div class="result-main">
+            <div class="cluster-tag" id="clusterTag"><span class="dot" id="clusterTagDot"></span><span
+                id="clusterTagText">CLUSTER 0</span></div>
+            <div class="persona-name" id="personaName">—</div>
+            <div class="persona-desc" id="personaDesc">—</div>
+
+            <div class="stat-row">
+              <div class="stat">
+                <div class="stat-label">AGE</div>
+                <div class="stat-value" id="statAge">—</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">INCOME</div>
+                <div class="stat-value" id="statIncome">—</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">SPENDING SCORE</div>
+                <div class="stat-value" id="statSpend">—</div>
+              </div>
+            </div>
+
+            <div class="products-title">Top picks for you</div>
+            <div class="product-grid" id="productGrid"></div>
+
+            <div class="products-title" style="margin-top:8px;">More options</div>
+            <div class="more-grid" id="moreGrid"></div>
+
+            <div class="result-actions">
+              <button class="btn btn-primary" data-nav="predict">Run another prediction</button>
+              <button class="btn btn-ghost" data-nav="history">View history</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HISTORY -->
+      <section class="screen" id="history">
+        <div class="history-wrap">
+          <div class="history-header">
+            <div class="page-title">Prediction history</div>
+            <button class="btn btn-ghost btn-sm" data-nav="predict">New prediction +</button>
+          </div>
+          <div class="history-list" id="historyList"></div>
+        </div>
+      </section>
+
+      <!-- ADMIN ANALYTICS DASHBOARD -->
+      <section class="screen" id="admin">
+        <div class="admin-wrap">
+          <div class="admin-header">
+            <div class="admin-eyebrow">Admin Only</div>
+            <div class="admin-title">Analytics Dashboard</div>
+          </div>
+
+          <!-- Access-denied overlay (shown to non-admins who reach this screen) -->
+          <div id="adminDenied" style="display:none;">
+            <div class="admin-denied">
+              <div class="admin-denied-icon">🔒</div>
+              <div class="admin-denied-title">Access Denied</div>
+              <div class="admin-denied-sub">This page is restricted to admin accounts.</div>
+            </div>
+          </div>
+
+          <!-- Loading state -->
+          <div id="adminLoading" class="admin-loading">Loading analytics…</div>
+
+          <!-- Dashboard content (shown only to admins) -->
+          <div id="adminContent" class="admin-layout" style="display:none;">
+
+            <aside class="admin-sidebar">
+              <div class="admin-sidebar-header admin-eyebrow" style="margin:0;">Admin Panel</div>
+              <nav id="adminNav">
+                <button class="admin-side-link active" data-admin-page="persona">Persona Analysis</button>
+                <button class="admin-side-link" data-admin-page="product">Product Analysis</button>
+                <button class="admin-side-link" data-admin-page="customer">Customer Statistics</button>
+                <button class="admin-side-link" data-admin-page="analytics">Analytics</button>
+                <button class="admin-side-link" data-admin-page="insights">Business Insights</button>
+              </nav>
+              <button class="admin-side-link admin-side-logout" id="adminSidebarLogout">Logout</button>
+            </aside>
+
+            <div class="admin-main">
+
+              <!-- PERSONA ANALYSIS (default page) -->
+              <div class="admin-page active" id="adminPagePersona">
+                <div class="admin-page-header">
+                  <div class="admin-page-title">Persona Analysis</div>
+                  <div class="admin-page-sub">How customers distribute across personas, and how each persona compares.
+                  </div>
+                </div>
+
+                <div class="admin-chart-card admin-section-gap">
+                  <div class="admin-chart-title">Customer Persona Distribution</div>
+                  <canvas id="adminChartCanvas"></canvas>
+                </div>
+
+                <div class="admin-chart-card admin-section-gap">
+                  <div class="admin-chart-title">Persona Analysis</div>
+                  <div id="adminPersonaTableWrap"></div>
+                </div>
+
+                <div class="highlight-row">
+                  <div class="highlight-card" id="adminHighestSpendCard">
+                    <div class="highlight-label">Highest Spending Persona</div>
+                    <div class="highlight-persona" id="adminHighestSpendName">—</div>
+                    <div class="highlight-value" id="adminHighestSpendVal">—</div>
+                  </div>
+                  <div class="highlight-card" id="adminHighestIncomeCard">
+                    <div class="highlight-label">Highest Income Persona</div>
+                    <div class="highlight-persona" id="adminHighestIncomeName">—</div>
+                    <div class="highlight-value" id="adminHighestIncomeVal">—</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PRODUCT ANALYSIS -->
+              <div class="admin-page" id="adminPageProduct">
+                <div class="admin-page-header">
+                  <div class="admin-page-title">Product Analysis</div>
+                  <div class="admin-page-sub">Which products get recommended most often across all predictions.</div>
+                </div>
+
+                <div class="admin-chart-card admin-section-gap">
+                  <div class="admin-chart-title">Most Recommended Products</div>
+                  <canvas id="adminProductsCanvas"></canvas>
+                </div>
+              </div>
+
+              <!-- CUSTOMER STATISTICS -->
+              <div class="admin-page" id="adminPageCustomer">
+                <div class="admin-page-header">
+                  <div class="admin-page-title">Customer Statistics</div>
+                  <div class="admin-page-sub">Overall averages across every customer analyzed.</div>
+                </div>
+
+                <div class="admin-metrics-3 admin-section-gap">
+                  <div class="metric-card">
+                    <div class="metric-label">Average Age</div>
+                    <div class="metric-value" id="adminAvgAge">—</div>
+                    <div class="metric-sub">years</div>
+                  </div>
+                  <div class="metric-card">
+                    <div class="metric-label">Average Annual Income</div>
+                    <div class="metric-value" id="adminAvgIncome">—</div>
+                    <div class="metric-sub">USD thousands</div>
+                  </div>
+                  <div class="metric-card">
+                    <div class="metric-label">Average Spending Score</div>
+                    <div class="metric-value" id="adminAvgSpend">—</div>
+                    <div class="metric-sub">out of 100</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ANALYTICS (general overview) -->
+              <div class="admin-page" id="adminPageAnalytics">
+                <div class="admin-page-header">
+                  <div class="admin-page-title">Analytics</div>
+                  <div class="admin-page-sub">System-wide snapshot.</div>
+                </div>
+
+                <div class="admin-overview-row">
+                  <div class="metric-card">
+                    <div class="metric-label">Total Customers Analyzed</div>
+                    <div class="metric-value" id="adminTotal">—</div>
+                    <div class="metric-sub" id="adminTotalSub">predictions in database</div>
+                  </div>
+
+                  <div class="metric-card">
+                    <div class="metric-label">Most Common Persona</div>
+                    <div class="metric-persona-name" id="adminTopPersona">—</div>
+                    <div class="metric-persona-stats" id="adminTopStats">— customers · —%</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- BUSINESS INSIGHTS -->
+              <div class="admin-page" id="adminPageInsights">
+                <div class="admin-page-header">
+                  <div class="admin-page-title">Business Insights</div>
+                  <div class="admin-page-sub">Dynamically calculated highlights drawn from the data above.</div>
+                </div>
+
+                <div class="admin-chart-card">
+                  <div class="bi-groups">
+
+                    <div class="bi-group">
+                      <div class="bi-group-title">Customer Personas</div>
+                      <div class="bi-item">💡 <strong>Most Common:</strong> <span id="biPersonaMost">—</span></div>
+                      <div class="bi-item">💡 <strong>Least Common:</strong> <span id="biPersonaLeast">—</span></div>
+                    </div>
+
+                    <div class="bi-group">
+                      <div class="bi-group-title">Recommended Products</div>
+                      <div class="bi-item">💡 <strong>Most Recommended:</strong> <span id="biProductMost">—</span></div>
+                      <div class="bi-item">💡 <strong>Least Recommended:</strong> <span id="biProductLeast">—</span>
+                      </div>
+                    </div>
+
+                    <div class="bi-group">
+                      <div class="bi-group-title">Spending</div>
+                      <div class="bi-item">💡 <strong>Highest Average Spending:</strong> <span id="biSpendHigh">—</span>
+                      </div>
+                      <div class="bi-item">💡 <strong>Lowest Average Spending:</strong> <span id="biSpendLow">—</span>
+                      </div>
+                    </div>
+
+                    <div class="bi-group">
+                      <div class="bi-group-title">Income</div>
+                      <div class="bi-item">💡 <strong>Highest Average Income:</strong> <span id="biIncomeHigh">—</span>
+                      </div>
+                      <div class="bi-item">💡 <strong>Lowest Average Income:</strong> <span id="biIncomeLow">—</span>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // ---------------- App state ----------------
+    const state = {
+      user: null,
+      role: null,         // 'user' or 'admin'
+      personas: {},       // filled from /api/personas
+      lastResult: null,
+      adminData: null      // last-fetched /api/admin/stats payload
+    };
+
+    const API = {
+      async post(url, body) {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify(body || {})
+        });
+        const data = await res.json().catch(() => ({}));
+        return { ok: res.ok, data };
+      },
+      async get(url) {
+        const res = await fetch(url, { credentials: 'same-origin' });
+        const data = await res.json().catch(() => ({}));
+        return { ok: res.ok, data };
+      }
+    };
+
+    // ---------------- Navigation ----------------
+    function showScreen(id) {
+      // Admin guard: if anyone (logged in or not) tries to reach the admin
+      // screen without being an authenticated admin, show the denied view.
+      if (id === 'admin') {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('admin').classList.add('active');
+        document.querySelectorAll('#navLinks button').forEach(b => {
+          b.classList.toggle('active', b.dataset.nav === 'admin');
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        if (state.role !== 'admin') {
+          // Not an admin — show the access-denied message, hide content.
+          document.getElementById('adminLoading').style.display = 'none';
+          document.getElementById('adminContent').style.display = 'none';
+          document.getElementById('adminDenied').style.display = 'block';
+        } else {
+          // Authenticated admin — reset to the default landing page and load real data.
+          document.getElementById('adminDenied').style.display = 'none';
+          showAdminPage('persona');
+          loadAdminStats();
+        }
+        return;
+      }
+
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('#navLinks button').forEach(b => {
+        b.classList.toggle('active', b.dataset.nav === id);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (id === 'history') loadHistory();
+    }
+
+    document.querySelectorAll('[data-nav]').forEach(el => {
+      el.addEventListener('click', () => {
+        const target = el.dataset.nav;
+        if ((target === 'predict' || target === 'history') && !state.user) {
+          showScreen('auth');
+          return;
+        }
+        showScreen(target);
+      });
+    });
+
+    // ---------------- Auth ----------------
+    document.getElementById('tabLogin').addEventListener('click', () => {
+      document.getElementById('tabLogin').classList.add('active');
+      document.getElementById('tabRegister').classList.remove('active');
+      document.getElementById('loginForm').style.display = 'block';
+      document.getElementById('registerForm').style.display = 'none';
+    });
+    document.getElementById('tabRegister').addEventListener('click', () => {
+      document.getElementById('tabRegister').classList.add('active');
+      document.getElementById('tabLogin').classList.remove('active');
+      document.getElementById('registerForm').style.display = 'block';
+      document.getElementById('loginForm').style.display = 'none';
+    });
+
+    function showError(id, msg) {
+      const el = document.getElementById(id);
+      el.textContent = msg;
+      el.classList.add('show');
+    }
+    function hideError(id) {
+      document.getElementById(id).classList.remove('show');
+    }
+
+    async function doLogout() {
+      await API.post('/api/logout');
+      location.reload();
+    }
+
+    function setLoggedInUI(username, role) {
+      state.user = username;
+      state.role = role || 'user';
+      document.getElementById('userChip').classList.add('show');
+      document.getElementById('userChipName').textContent = username;
+      const authBtn = document.getElementById('authBtn');
+      authBtn.textContent = 'Log out';
+      authBtn.dataset.nav = '';
+      authBtn.onclick = doLogout;
+      // Show the Admin nav button only for actual admin accounts.
+      const adminNavBtn = document.getElementById('adminNavBtn');
+      if (state.role === 'admin') {
+        adminNavBtn.style.display = '';
+      } else {
+        adminNavBtn.style.display = 'none';
+      }
+    }
+
+    document.getElementById('loginSubmit').addEventListener('click', async () => {
+      hideError('loginError');
+      const username = document.getElementById('loginUsername').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      if (!username || !password) { showError('loginError', 'Enter both username and password.'); return; }
+
+      const btn = document.getElementById('loginSubmit');
+      btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>';
+      const { ok, data } = await API.post('/api/login', { username, password });
+      btn.disabled = false; btn.textContent = 'Log in →';
+
+      if (ok && data.success) {
+        setLoggedInUI(data.username, data.role);
+        // Admin users land on the analytics dashboard; normal users on predict.
+        if (data.role === 'admin') {
+          showScreen('admin');
+        } else {
+          showScreen('predict');
+        }
+      } else {
+        showError('loginError', data.message || 'Login failed.');
+      }
+    });
+
+    document.getElementById('registerSubmit').addEventListener('click', async () => {
+      hideError('registerError');
+      document.getElementById('registerSuccess').classList.remove('show');
+      const username = document.getElementById('regUsername').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPassword').value;
+      if (!username || !password) { showError('registerError', 'Username and password are required.'); return; }
+
+      const btn = document.getElementById('registerSubmit');
+      btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>';
+      const { ok, data } = await API.post('/api/register', { username, email, password });
+      btn.disabled = false; btn.textContent = 'Create account →';
+
+      if (ok && data.success) {
+        const successEl = document.getElementById('registerSuccess');
+        successEl.textContent = data.message + ' Switching to login...';
+        successEl.classList.add('show');
+        setTimeout(() => document.getElementById('tabLogin').click(), 900);
+      } else {
+        showError('registerError', data.message || 'Registration failed.');
+      }
+    });
+
+    // ---------------- Predict form ----------------
+    const incomeSlider = document.getElementById('inIncome');
+    const spendSlider = document.getElementById('inSpend');
+    const incomeVal = document.getElementById('incomeVal');
+    const spendVal = document.getElementById('spendVal');
+
+    function fmtIncome(v) {
+      // v = Annual_Income_k (USD thousands); display in Indian ₹ lakh/crore
+      // 1 USD ≈ 83 INR → v * 1000 * 83 / 100000 = v * 0.83 lakhs
+      const lakhs = v * 0.83;
+      if (lakhs >= 100) {
+        return '₹' + (lakhs / 100).toFixed(2) + ' Cr';
+      }
+      if (lakhs >= 10) {
+        return '₹' + Math.round(lakhs) + 'L';
+      }
+      return '₹' + lakhs.toFixed(1) + 'L';
+    }
+    incomeSlider.addEventListener('input', () => incomeVal.textContent = fmtIncome(incomeSlider.value));
+    spendSlider.addEventListener('input', () => spendVal.textContent = spendSlider.value);
+    incomeVal.textContent = fmtIncome(incomeSlider.value);
+    spendVal.textContent = spendSlider.value;
+
+    const ICON_RULES = [
+      [/phone|iphone/i, '📱'], [/laptop|macbook/i, '💻'], [/tv/i, '📺'],
+      [/ear(bud|phone)|headphone|audio/i, '🎧'], [/watch|tracker/i, '⌚'],
+      [/bag|backpack/i, '🎒'], [/book/i, '📚'], [/bottle/i, '💧'],
+      [/speaker/i, '🔊'], [/case/i, '🛡️'], [/power ?bank|charger/i, '🔋'],
+      [/sneaker|shoe/i, '👟'], [/perfume/i, '🌸'], [/coffee/i, '☕'],
+    ];
+    function iconFor(name) {
+      for (const [re, icon] of ICON_RULES) if (re.test(name)) return icon;
+      return '🛍️';
+    }
+
+    document.getElementById('predictSubmit').addEventListener('click', async () => {
+      hideError('predictError');
+      const age = parseInt(document.getElementById('inAge').value, 10) || 25;
+      const gender = document.getElementById('inGender').value;
+      const income = parseInt(incomeSlider.value, 10);
+      const spending_score = parseInt(spendSlider.value, 10);
+
+      showScreen('processing');
+      const [_, apiResult] = await Promise.all([
+        runProcessingAnimation(),
+        API.post('/api/predict', { age, gender, income, spending_score })
+      ]);
+
+      if (apiResult.ok && apiResult.data.success) {
+        state.lastResult = apiResult.data;
+        renderResult(apiResult.data);
+        showScreen('result');
+      } else {
+        showScreen('predict');
+        showError('predictError', apiResult.data.message || 'Prediction failed.');
+      }
+    });
+
+    // ---------------- Processing canvas animation ----------------
+    function runProcessingAnimation() {
+      return new Promise(resolve => {
+        const canvas = document.getElementById('procCanvas');
+        const ctx = canvas.getContext('2d');
+        const W = canvas.width, H = canvas.height;
+        const colors = ['#FF6B6B', '#4ECDC4', '#FFD166', '#A78BFA', '#06D6A0'];
+        const particles = Array.from({ length: 40 }, () => ({
+          x: Math.random() * W, y: Math.random() * H,
+          tx: W / 2 + (Math.random() - 0.5) * 30,
+          ty: H / 2 + (Math.random() - 0.5) * 30,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          r: 2 + Math.random() * 2
+        }));
+        let frame = 0;
+        const totalFrames = 70;
+
+        function draw() {
+          ctx.clearRect(0, 0, W, H);
+          frame++;
+          const t = Math.min(frame / totalFrames, 1);
+          const ease = 1 - Math.pow(1 - t, 3);
+          particles.forEach(p => {
+            const cx = p.x + (p.tx - p.x) * ease;
+            const cy = p.y + (p.ty - p.y) * ease;
+            ctx.beginPath();
+            ctx.arc(cx, cy, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = 0.85;
+            ctx.fill();
+          });
+          ctx.globalAlpha = 1;
+          ctx.strokeStyle = 'rgba(124,131,253,0.4)';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(W / 2, H / 2, 90, frame * 0.03, frame * 0.03 + 4.2);
+          ctx.stroke();
+
+          if (frame < totalFrames + 15) {
+            requestAnimationFrame(draw);
+          } else {
+            resolve();
+          }
+        }
+        draw();
+      });
+    }
+
+    // ---------------- Result rendering ----------------
+    function renderResult(result) {
+      const color = result.color || '#7C83FD';
+      document.getElementById('clusterTagText').textContent = 'CLUSTER ' + result.cluster;
+      document.getElementById('clusterTagDot').style.background = color;
+      document.getElementById('personaName').textContent = result.persona;
+      document.getElementById('personaDesc').textContent = result.description;
+      document.getElementById('statAge').textContent = result.input.age;
+      document.getElementById('statIncome').textContent = fmtIncome(result.input.income);
+      document.getElementById('statSpend').textContent = result.input.spending_score + ' / 100';
+
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+      (result.top_picks || []).forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'product-card';
+        div.innerHTML = `
+        <span class="product-icon">${iconFor(p.name)}</span>
+        <span class="product-name">${p.name}</span>
+        <div class="product-reason">${p.reason}</div>
+      `;
+        grid.appendChild(div);
+      });
+
+      const moreGrid = document.getElementById('moreGrid');
+      moreGrid.innerHTML = '';
+      (result.more_options || []).forEach(p => {
+        const row = document.createElement('div');
+        row.className = 'more-item';
+        row.innerHTML = `
+        <span class="more-item-name">${iconFor(p.name)} ${p.name}</span>
+      `;
+        moreGrid.appendChild(row);
+      });
+
+      renderClusterMap(result.cluster, result.centroid);
+    }
+
+    function renderClusterMap(myCluster, myCentroid) {
+      const map = document.getElementById('clusterMap');
+      map.querySelectorAll('.map-dot').forEach(d => d.remove());
+
+      Object.values(state.personas).forEach(p => {
+        for (let i = 0; i < 9; i++) {
+          const dot = document.createElement('div');
+          dot.className = 'map-dot';
+          dot.style.background = p.color;
+          dot.style.left = (p.centroid.x + (Math.random() - 0.5) * 16) + '%';
+          dot.style.top = (p.centroid.y + (Math.random() - 0.5) * 16) + '%';
+          map.appendChild(dot);
+        }
+      });
+
+      const youDot = document.getElementById('youDot');
+      youDot.classList.remove('settled');
+      youDot.style.left = '50%';
+      youDot.style.top = '50%';
+      void youDot.offsetWidth;
+
+      requestAnimationFrame(() => {
+        youDot.style.left = myCentroid.x + '%';
+        youDot.style.top = myCentroid.y + '%';
+        youDot.style.background = state.personas[myCluster] ? state.personas[myCluster].color : '#fff';
+        setTimeout(() => youDot.classList.add('settled'), 1400);
+      });
+    }
+
+    // ---------------- History ----------------
+    async function loadHistory() {
+      const list = document.getElementById('historyList');
+      list.innerHTML = '<div class="empty-state">Loading…</div>';
+      const { ok, data } = await API.get('/api/history');
+      if (!ok) {
+        list.innerHTML = '<div class="empty-state">Could not load history.</div>';
+        return;
+      }
+      if (data.length === 0) {
+        list.innerHTML = '<div class="empty-state">No predictions yet. Run one from the Predict tab.</div>';
+        return;
+      }
+      list.innerHTML = '';
+      data.forEach((h, idx) => {
+        const row = document.createElement('div');
+        row.className = 'history-row';
+        const rowId = 'hr-products-' + idx;
+        const tag = (p, isTop) => `<span class="product-tag" style="${isTop ? 'border-color:var(--accent);color:var(--text);' : ''}">${isTop ? '★ ' : ''}${p.name}</span>`;
+        const productTags = (h.top_picks || []).map(p => tag(p, true)).join('') +
+          (h.more_options || []).map(p => tag(p, false)).join('');
+        row.innerHTML = `
+        <div class="hr-header">
+          <span class="hr-dot" style="background:${h.color}"></span>
+          <span class="hr-persona">${h.persona}</span>
+          <span class="hr-meta">age ${h.age} · ${fmtIncome(h.income)} · spend ${h.spending_score} · ${(h.products || []).length} products</span>
+          <span class="hr-date">${h.date}</span>
+          <span class="hr-chevron">▶</span>
+        </div>
+        <div class="hr-products" id="${rowId}">${productTags}</div>
+      `;
+        row.querySelector('.hr-header').addEventListener('click', () => {
+          row.classList.toggle('open');
+        });
+        list.appendChild(row);
+      });
+    }
+
+    // ---------------- Legend / personas (public data) ----------------
+    async function loadPersonas() {
+      const { ok, data } = await API.get('/api/personas');
+      if (!ok) return;
+      data.forEach(p => { state.personas[p.cluster] = p; });
+
+      const legend = document.getElementById('legend');
+      legend.innerHTML = '';
+      data.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'legend-item';
+        item.innerHTML = `<span class="legend-dot" style="background:${p.color}"></span>${p.persona}`;
+        legend.appendChild(item);
+      });
+    }
+
+    // ---------------- Restore session on load ----------------
+    async function restoreSession() {
+      const { ok, data } = await API.get('/api/session');
+      if (ok && data.logged_in) {
+        setLoggedInUI(data.username, data.role);
+      }
+    }
+
+    // ---------------- Admin sidebar navigation ----------------
+    const ADMIN_PAGE_IDS = {
+      persona: 'adminPagePersona',
+      product: 'adminPageProduct',
+      customer: 'adminPageCustomer',
+      analytics: 'adminPageAnalytics',
+      insights: 'adminPageInsights'
+    };
+
+    function showAdminPage(page) {
+      document.querySelectorAll('.admin-side-link[data-admin-page]').forEach(b => {
+        b.classList.toggle('active', b.dataset.adminPage === page);
+      });
+      Object.entries(ADMIN_PAGE_IDS).forEach(([key, id]) => {
+        document.getElementById(id).classList.toggle('active', key === page);
+      });
+      // Redraw canvases for the now-visible page so they size against real width.
+      if (state.adminData) {
+        if (page === 'persona') renderPersonaDistributionChart(state.adminData);
+        if (page === 'product') renderProductsChart(state.adminData);
+      }
+    }
+
+    document.querySelectorAll('.admin-side-link[data-admin-page]').forEach(btn => {
+      btn.addEventListener('click', () => showAdminPage(btn.dataset.adminPage));
+    });
+
+    document.getElementById('adminSidebarLogout').addEventListener('click', doLogout);
+
+    // ---------------- Admin analytics dashboard ----------------
+    async function loadAdminStats() {
+      // Show loading state, hide content.
+      document.getElementById('adminLoading').style.display = 'block';
+      document.getElementById('adminContent').style.display = 'none';
+
+      const { ok, data } = await API.get('/api/admin/stats');
+
+      document.getElementById('adminLoading').style.display = 'none';
+
+      if (!ok || !data.success) {
+        document.getElementById('adminDenied').style.display = 'block';
+        return;
+      }
+
+      state.adminData = data;
+
+      // --- Existing: total predictions + most common persona ---
+      document.getElementById('adminTotal').textContent = data.total_predictions.toLocaleString();
+
+      const top = data.most_common_persona;
+      if (top) {
+        document.getElementById('adminTopPersona').textContent = top.persona;
+        document.getElementById('adminTopStats').textContent =
+          top.count.toLocaleString() + ' customers · ' + top.pct + '%';
+      } else {
+        document.getElementById('adminTopPersona').textContent = 'No data yet';
+        document.getElementById('adminTopStats').textContent = '—';
+      }
+
+      // --- Existing: persona distribution bar chart ---
+      renderPersonaDistributionChart(data);
+
+      // --- New: customer statistics metric cards ---
+      const cs = data.customer_stats || {};
+      document.getElementById('adminAvgAge').textContent =
+        cs.avg_age !== null && cs.avg_age !== undefined ? cs.avg_age : '—';
+      document.getElementById('adminAvgIncome').textContent =
+        cs.avg_income !== null && cs.avg_income !== undefined ? cs.avg_income : '—';
+      document.getElementById('adminAvgSpend').textContent =
+        cs.avg_spending_score !== null && cs.avg_spending_score !== undefined ? cs.avg_spending_score : '—';
+
+      // --- New: Most recommended products bar chart ---
+      renderProductsChart(data);
+
+      // --- New: Persona analysis table ---
+      const paList = data.persona_analysis || [];
+      const tableWrap = document.getElementById('adminPersonaTableWrap');
+      if (paList.length === 0) {
+        tableWrap.innerHTML = '<div style="color:var(--text-dim);font-family:var(--font-mono);font-size:0.82rem;padding:16px 0;">No prediction data yet.</div>';
+      } else {
+        let tableHTML = `
+        <table class="persona-table">
+          <thead>
+            <tr>
+              <th>Persona</th>
+              <th>Customers</th>
+              <th>Avg Income (k USD)</th>
+              <th>Avg Spending Score</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+        paList.forEach(pa => {
+          tableHTML += `
+          <tr>
+            <td>
+              <div class="pt-persona-cell">
+                <div class="pt-dot" style="background:${pa.color || '#7C83FD'}"></div>
+                <span class="pt-name">${pa.persona}</span>
+              </div>
+            </td>
+            <td>${pa.count.toLocaleString()}</td>
+            <td>${pa.avg_income !== null && pa.avg_income !== undefined ? pa.avg_income : '—'}</td>
+            <td>${pa.avg_spending_score !== null && pa.avg_spending_score !== undefined ? pa.avg_spending_score : '—'}</td>
+          </tr>
+        `;
+        });
+        tableHTML += '</tbody></table>';
+        tableWrap.innerHTML = tableHTML;
+      }
+
+      // --- New: Highest spending persona ---
+      const hs = data.highest_spending_persona;
+      if (hs) {
+        document.getElementById('adminHighestSpendName').textContent = hs.persona;
+        document.getElementById('adminHighestSpendName').style.color = hs.color || 'var(--accent)';
+        document.getElementById('adminHighestSpendVal').textContent =
+          'Avg Spending Score: ' + hs.avg_spending_score;
+      } else {
+        document.getElementById('adminHighestSpendName').textContent = 'No data';
+        document.getElementById('adminHighestSpendVal').textContent = '—';
+      }
+
+      // --- New: Highest income persona ---
+      const hi = data.highest_income_persona;
+      if (hi) {
+        document.getElementById('adminHighestIncomeName').textContent = hi.persona;
+        document.getElementById('adminHighestIncomeName').style.color = hi.color || 'var(--accent)';
+        document.getElementById('adminHighestIncomeVal').textContent =
+          'Avg Income: ' + hi.avg_income + 'k USD';
+      } else {
+        document.getElementById('adminHighestIncomeName').textContent = 'No data';
+        document.getElementById('adminHighestIncomeVal').textContent = '—';
+      }
+
+      // --- New: Business Insights (plain-language, data-driven) ---
+      renderBusinessInsights(data.business_insights || {});
+
+      document.getElementById('adminContent').style.display = 'flex';
+    }
+
+    function renderPersonaDistributionChart(data) {
+      const canvas = document.getElementById('adminChartCanvas');
+      const dist = data.distribution || [];
+
+      if (dist.length === 0) {
+        canvas.style.display = 'none';
+        return;
+      }
+
+      const barH = 38;
+      const labelW = 170;
+      const valueW = 56;
+      const rowGap = 10;
+      const chartH = dist.length * (barH + rowGap) + 20;
+
+      const dpr = window.devicePixelRatio || 1;
+      const displayW = canvas.offsetWidth || 600;
+      canvas.width = displayW * dpr;
+      canvas.height = chartH * dpr;
+      canvas.style.height = chartH + 'px';
+
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      const maxCount = dist[0].count;
+      const barAreaW = displayW - labelW - valueW - 16;
+
+      dist.forEach((item, i) => {
+        const y = i * (barH + rowGap) + 10;
+        const barW = maxCount > 0 ? Math.round((item.count / maxCount) * barAreaW) : 0;
+
+        ctx.fillStyle = 'rgba(255,255,255,0.04)';
+        ctx.beginPath();
+        ctx.roundRect(labelW, y + (barH - 22) / 2, barAreaW, 22, 6);
+        ctx.fill();
+
+        const grad = ctx.createLinearGradient(labelW, 0, labelW + barW, 0);
+        grad.addColorStop(0, item.color);
+        grad.addColorStop(1, item.color + 'AA');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.roundRect(labelW, y + (barH - 22) / 2, Math.max(barW, 4), 22, 6);
+        ctx.fill();
+
+        ctx.fillStyle = '#9A9FC7';
+        ctx.font = '500 12px Inter, sans-serif';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        let label = item.persona;
+        if (ctx.measureText(label).width > labelW - 10) {
+          while (ctx.measureText(label + '…').width > labelW - 10 && label.length > 0) {
+            label = label.slice(0, -1);
+          }
+          label += '…';
+        }
+        ctx.fillText(label, labelW - 8, y + barH / 2);
+
+        ctx.fillStyle = '#F1F1FB';
+        ctx.font = '600 12px JetBrains Mono, monospace';
+        ctx.textAlign = 'left';
+        ctx.fillText(item.count + ' (' + item.pct + '%)', labelW + barAreaW + 8, y + barH / 2);
+      });
+    }
+
+    function renderProductsChart(data) {
+      const products = data.top_products || [];
+      const prodCanvas = document.getElementById('adminProductsCanvas');
+      if (products.length === 0) {
+        prodCanvas.style.display = 'none';
+        return;
+      }
+
+      const pBarH = 34;
+      const pLabelW = 210;
+      const pValueW = 50;
+      const pRowGap = 8;
+      const pChartH = products.length * (pBarH + pRowGap) + 20;
+
+      const dpr2 = window.devicePixelRatio || 1;
+      const pDisplayW = prodCanvas.offsetWidth || 600;
+      prodCanvas.width = pDisplayW * dpr2;
+      prodCanvas.height = pChartH * dpr2;
+      prodCanvas.style.height = pChartH + 'px';
+
+      const pCtx = prodCanvas.getContext('2d');
+      pCtx.scale(dpr2, dpr2);
+
+      const pMaxCount = products[0].count;
+      const pBarAreaW = pDisplayW - pLabelW - pValueW - 16;
+
+      // Use a cycle of accent colors for products
+      const productColors = [
+        '#7C83FD', '#4ECDC4', '#FFD166', '#A78BFA', '#06D6A0',
+        '#F473B9', '#FF6B6B', '#82C91E', '#FFA94D', '#E599F7'
+      ];
+
+      products.forEach((item, i) => {
+        const py = i * (pBarH + pRowGap) + 10;
+        const pBarW = pMaxCount > 0 ? Math.round((item.count / pMaxCount) * pBarAreaW) : 0;
+        const color = productColors[i % productColors.length];
+
+        // Track
+        pCtx.fillStyle = 'rgba(255,255,255,0.04)';
+        pCtx.beginPath();
+        pCtx.roundRect(pLabelW, py + (pBarH - 20) / 2, pBarAreaW, 20, 5);
+        pCtx.fill();
+
+        // Bar
+        const pGrad = pCtx.createLinearGradient(pLabelW, 0, pLabelW + pBarW, 0);
+        pGrad.addColorStop(0, color);
+        pGrad.addColorStop(1, color + 'AA');
+        pCtx.fillStyle = pGrad;
+        pCtx.beginPath();
+        pCtx.roundRect(pLabelW, py + (pBarH - 20) / 2, Math.max(pBarW, 4), 20, 5);
+        pCtx.fill();
+
+        // Label (left) — truncate long product names
+        pCtx.fillStyle = '#9A9FC7';
+        pCtx.font = '500 11.5px Inter, sans-serif';
+        pCtx.textAlign = 'right';
+        pCtx.textBaseline = 'middle';
+        let pLabel = item.name;
+        if (pCtx.measureText(pLabel).width > pLabelW - 10) {
+          while (pCtx.measureText(pLabel + '…').width > pLabelW - 10 && pLabel.length > 0) {
+            pLabel = pLabel.slice(0, -1);
+          }
+          pLabel += '…';
+        }
+        pCtx.fillText(pLabel, pLabelW - 8, py + pBarH / 2);
+
+        // Count (right)
+        pCtx.fillStyle = '#F1F1FB';
+        pCtx.font = '600 11.5px JetBrains Mono, monospace';
+        pCtx.textAlign = 'left';
+        pCtx.fillText(item.count, pLabelW + pBarAreaW + 8, py + pBarH / 2);
+      });
+    }
+
+    function renderBusinessInsights(bi) {
+      const set = (id, text) => { document.getElementById(id).textContent = text; };
+
+      // 1. Customer Persona Insights
+      const pMost = bi.persona && bi.persona.most_common;
+      const pLeast = bi.persona && bi.persona.least_common;
+      set('biPersonaMost', pMost
+        ? `Most customers belong to the ${pMost.persona} persona (${pMost.count.toLocaleString()} customers · ${pMost.pct}%).`
+        : 'Not enough data to determine customer personas.');
+      set('biPersonaLeast', pLeast
+        ? `${pLeast.persona} is the least represented customer persona (${pLeast.count.toLocaleString()} customers · ${pLeast.pct}%).`
+        : 'Not enough data to determine customer personas.');
+
+      // 2. Product Recommendation Insights
+      const rMost = bi.products && bi.products.most_recommended;
+      const rLeast = bi.products && bi.products.least_recommended;
+      set('biProductMost', rMost
+        ? `${rMost.name} is the most frequently recommended product (recommended ${rMost.count.toLocaleString()} times).`
+        : 'Not enough data to determine the most/least recommended product.');
+      set('biProductLeast', rLeast
+        ? `${rLeast.name} is the least frequently recommended product (recommended ${rLeast.count.toLocaleString()} times).`
+        : 'Not enough data to determine the most/least recommended product.');
+
+      // 3. Spending Insights
+      const sHigh = bi.spending && bi.spending.highest;
+      const sLow = bi.spending && bi.spending.lowest;
+      set('biSpendHigh', sHigh
+        ? `${sHigh.persona} has the highest average spending (avg spending score ${sHigh.avg_spending_score}).`
+        : 'Spending data is not available.');
+      set('biSpendLow', sLow
+        ? `${sLow.persona} has the lowest average spending (avg spending score ${sLow.avg_spending_score}).`
+        : 'Spending data is not available.');
+
+      // 4. Income Insights
+      const iHigh = bi.income && bi.income.highest;
+      const iLow = bi.income && bi.income.lowest;
+      set('biIncomeHigh', iHigh
+        ? `${iHigh.persona} has the highest average income (avg ${iHigh.avg_income}k USD).`
+        : 'Income data is not available.');
+      set('biIncomeLow', iLow
+        ? `${iLow.persona} has the lowest average income (avg ${iLow.avg_income}k USD).`
+        : 'Income data is not available.');
+    }
+
+    // ---------------- Ambient background particle field ----------------
+    const bgCanvas = document.getElementById('bgCanvas');
+    const bgCtx = bgCanvas.getContext('2d');
+    let W, H;
+    function resize() {
+      W = bgCanvas.width = window.innerWidth;
+      H = bgCanvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const colorList = ['#FF6B6B', '#4ECDC4', '#FFD166', '#A78BFA', '#06D6A0'];
+    const bgParticles = Array.from({ length: 70 }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
+      r: 1 + Math.random() * 2, color: colorList[Math.floor(Math.random() * colorList.length)]
+    }));
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function animateBg() {
+      bgCtx.clearRect(0, 0, W, H);
+      bgParticles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+        bgCtx.beginPath();
+        bgCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        bgCtx.fillStyle = p.color;
+        bgCtx.globalAlpha = 0.35;
+        bgCtx.fill();
+      });
+      if (!reduceMotion) requestAnimationFrame(animateBg);
+    }
+    animateBg();
+
+    // ---------------- Init ----------------
+    loadPersonas();
+    restoreSession();
+  </script>
+
+</body>
+
+</html>

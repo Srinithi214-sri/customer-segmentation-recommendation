@@ -1,0 +1,636 @@
+product_id,name,category,income_level,spend_level,price_range
+1,Basic Phone Case,accessories,low,low,$3–$6
+2,Wired Earphones,electronics,low,low,$5–$9
+3,Reusable Water Bottle,lifestyle,low,low,$6–$10
+4,Notebook & Pen Set,stationery,low,low,$4–$7
+5,Plastic Lunch Box,kitchen,low,low,$5–$9
+6,Basic Umbrella,lifestyle,low,low,$8–$14
+7,Cotton Tote Bag,fashion,low,low,$5–$9
+8,Keychain Flashlight,accessories,low,low,$4–$7
+9,Simple Wall Clock,home,low,low,$10–$18
+10,Foldable Hand Fan,lifestyle,low,low,$5–$8
+11,Basic Sewing Kit,home,low,low,$7–$12
+12,Plastic Storage Boxes Set,home,low,low,$10–$18
+13,Doormat,home,low,low,$9–$16
+14,Basic Desk Calendar,stationery,low,low,$4–$7
+15,Rubber Phone Grip,accessories,low,low,$3–$6
+16,Budget Sunglasses,fashion,low,low,$6–$11
+17,Travel Toothbrush Kit,lifestyle,low,low,$4–$8
+18,Cotton Socks Pack (5 Pairs),fashion,low,low,$6–$10
+19,Plastic Hangers Set (10),home,low,low,$5–$9
+20,Mini Stapler Set,stationery,low,low,$5–$9
+21,Zip-Lock Bags Pack,kitchen,low,low,$3–$6
+22,Basic Winter Gloves,fashion,low,low,$5–$9
+23,Hair Ties Pack (20),beauty,low,low,$3–$5
+24,Ballpoint Pens Pack (10),stationery,low,low,$3–$6
+25,Plant Misting Spray Bottle,garden,low,low,$4–$7
+26,Sticky Notes Pack (5 Pads),stationery,low,low,$4–$7
+27,Basic Dish Rack,kitchen,low,low,$8–$14
+28,Foldable Grocery Bag,lifestyle,low,low,$4–$7
+29,Shoe Insoles Pair,fashion,low,low,$4–$7
+30,Foam Ear Plugs Pack,health,low,low,$3–$5
+31,Basic Face Masks Pack,health,low,low,$4–$7
+32,Budget Rubber Sandals,fashion,low,low,$5–$9
+33,String Lights 3m,home,low,low,$6–$11
+34,Basic Screwdriver Set,tools,low,low,$6–$11
+35,Laundry Mesh Bag,home,low,low,$4–$7
+36,Cotton Handkerchiefs Pack (5),fashion,low,low,$4–$7
+37,Compact Measuring Tape,tools,low,low,$4–$7
+38,Vegetable Peeler,kitchen,low,low,$3–$6
+39,Cable Organizer Clips (10),accessories,low,low,$3–$6
+40,Budget Mouse Pad,electronics,low,low,$4–$7
+41,Plastic Food Containers Set,kitchen,low,low,$8–$14
+42,Disposable Razors Pack (8),health,low,low,$4–$7
+43,Simple Alarm Clock,home,low,low,$8–$15
+44,Toothbrush Holder,home,low,low,$4–$7
+45,Shower Cap Pack,health,low,low,$3–$5
+46,Compact Mirror,beauty,low,low,$3–$6
+47,Rubber Gloves Pair,home,low,low,$3–$6
+48,Mini First Aid Kit,health,low,low,$6–$11
+49,Basic Sunscreen SPF30,beauty,low,low,$4–$7
+50,Clothespin Pack (20),home,low,low,$3–$6
+51,Kitchen Timer,kitchen,low,low,$5–$9
+52,Budget Canvas Wallet,fashion,low,low,$5–$9
+53,Basic Drawstring Backpack,fashion,low,low,$6–$11
+54,Plastic Water Jug 5L,kitchen,low,low,$6–$10
+55,Bug Repellent Spray,health,low,low,$5–$9
+56,Foam Yoga Block,fitness,low,low,$5–$9
+57,Basic Jump Rope,fitness,low,low,$4–$7
+58,Resistance Band (Single),fitness,low,low,$4–$7
+59,Cheap Flip Flops,fashion,low,low,$4–$8
+60,Pocket Notebook Pack (3),stationery,low,low,$4–$7
+61,Small Desk Fan,home,low,low,$8–$15
+62,Basic Keychain Set,accessories,low,low,$3–$6
+63,Budget Lip Balm Pack (3),beauty,low,low,$3–$5
+64,Cotton Pillow Cover (2),home,low,low,$7–$12
+65,Laundry Detergent Sheets,home,low,low,$5–$9
+66,Craft Scissors,tools,low,low,$3–$6
+67,Disposable Rain Poncho,lifestyle,low,low,$3–$6
+68,Basic Nail Care Kit,beauty,low,low,$4–$7
+69,Simple Pill Organizer,health,low,low,$3–$6
+70,Cheap Garden Gloves,garden,low,low,$3–$6
+71,Paper Straw Pack (50),kitchen,low,low,$3–$5
+72,Bluetooth Mini Speaker,electronics,low,mid,$18–$35
+73,Canvas Sneakers,fashion,low,mid,$22–$42
+74,Everyday Backpack,fashion,low,mid,$25–$48
+75,Polarized Sunglasses,fashion,low,mid,$18–$32
+76,Phone Ring Holder Stand,accessories,low,mid,$8–$15
+77,Casual Cap,fashion,low,mid,$12–$22
+78,Printed Hoodie,fashion,low,mid,$22–$42
+79,Travel Neck Pillow,travel,low,mid,$14–$25
+80,Portable Phone Charger 10000mAh,electronics,low,mid,$18–$32
+81,Insulated Lunch Bag,kitchen,low,mid,$16–$28
+82,Denim Jacket,fashion,low,mid,$32–$58
+83,Sports Cap Pack (2),fashion,low,mid,$12–$20
+84,Wireless Mouse,electronics,low,mid,$16–$28
+85,Artificial Desk Plant,home,low,mid,$14–$25
+86,Casual Fabric Belt,fashion,low,mid,$14–$24
+87,Basic Fitness Wristband,electronics,low,mid,$18–$32
+88,Compact Travel Umbrella,lifestyle,low,mid,$12–$22
+89,Stainless Steel Water Bottle,lifestyle,low,mid,$16–$28
+90,Running Shorts,fitness,low,mid,$14–$25
+91,Sports T-Shirt Pack (2),fashion,low,mid,$18–$32
+92,Adjustable Dumbbell 5kg,fitness,low,mid,$22–$40
+93,Casual Slip-On Shoes,fashion,low,mid,$22–$40
+94,Graphic Tee Pack (3),fashion,low,mid,$18–$32
+95,Small Shoulder Bag,fashion,low,mid,$22–$40
+96,USB Hub 4-Port,electronics,low,mid,$12–$22
+97,LED Desk Lamp,home,low,mid,$18–$32
+98,Silicone Phone Wallet,accessories,low,mid,$8–$15
+99,Cooling Sports Towel,fitness,low,mid,$10–$18
+100,Basic Knee Support Brace,health,low,mid,$12–$22
+101,Meal Prep Containers Set (4),kitchen,low,mid,$16–$28
+102,Folding Portable Table,home,low,mid,$28–$50
+103,Casual Shorts Pack (2),fashion,low,mid,$18–$32
+104,Non-Slip Yoga Mat,fitness,low,mid,$18–$32
+105,LED Digital Alarm Clock,home,low,mid,$12–$22
+106,Simple 4-Cup Coffee Maker,kitchen,low,mid,$22–$38
+107,Budget Electric Shaver,health,low,mid,$22–$38
+108,Lightweight Rain Jacket,lifestyle,low,mid,$25–$45
+109,Waterproof Fanny Pack,fashion,low,mid,$14–$25
+110,Insulated Tumbler 500ml,kitchen,low,mid,$14–$25
+111,Budget True Wireless Earbuds,electronics,low,mid,$22–$40
+112,Dot Grid Notebook Journal,stationery,low,mid,$10–$18
+113,Canvas Duffle Bag,travel,low,mid,$22–$40
+114,Bike Lock Cable,outdoor,low,mid,$12–$22
+115,Speed Skipping Rope Set,fitness,low,mid,$12–$22
+116,Small Backpack 20L,fashion,low,mid,$22–$40
+117,Basic Face Wash Kit,beauty,low,mid,$14–$25
+118,Budget Hair Dryer,beauty,low,mid,$18–$35
+119,Ceramic Plant Pot Set (3),garden,low,mid,$14–$25
+120,Floating Wall Shelf Set,home,low,mid,$18–$32
+121,Car Phone Holder,automotive,low,mid,$10–$18
+122,Phone Screen Protector Pack (2),accessories,low,mid,$8–$15
+123,Classic Chess Set,lifestyle,low,mid,$16–$28
+124,Simple Wristwatch,fashion,low,mid,$22–$42
+125,Reusable Coffee Cup Bamboo,kitchen,low,mid,$12–$22
+126,Lightweight Sleeping Bag,outdoor,low,mid,$28–$50
+127,Basic Camping Lantern,outdoor,low,mid,$14–$25
+128,Collapsible Laundry Basket,home,low,mid,$14–$25
+129,Budget Over-Ear Headphones,electronics,low,mid,$22–$40
+130,2-Step Skincare Starter Set,beauty,low,mid,$16–$28
+131,Training Gloves Pair,fitness,low,mid,$14–$25
+132,Foam Roller 30cm,fitness,low,mid,$14–$25
+133,Basic Drawing Tablet,electronics,low,mid,$25–$45
+134,Academic Planner Journal,stationery,low,mid,$10–$18
+135,High-Capacity Power Bank 20000mAh,electronics,low,mid,$22–$40
+136,Budget Running Shoes,fitness,low,mid,$25–$45
+137,Handheld Mini Fan USB,lifestyle,low,mid,$10–$18
+138,Basic Electric Kettle,kitchen,low,mid,$16–$28
+139,Portable Bluetooth Speaker Compact,electronics,low,mid,$22–$38
+140,Casual Crossbody Bag,fashion,low,mid,$18–$32
+141,Washable Microfiber Cloths Pack,home,low,mid,$8–$15
+142,Stackable Storage Drawers,home,low,mid,$18–$32
+143,Trendy Wireless Earbuds,electronics,low,high,$38–$68
+144,Budget Smartwatch,electronics,low,high,$45–$85
+145,Chunky Sneakers Trendy,fashion,low,high,$42–$78
+146,Graphic T-Shirts Set (3),fashion,low,high,$22–$40
+147,Portable Bluetooth Speaker,electronics,low,high,$28–$52
+148,Ring Light 10-inch,electronics,low,high,$28–$52
+149,Phone Camera Lens Kit,electronics,low,high,$25–$45
+150,Streetwear Cap,fashion,low,high,$20–$38
+151,LED Strip Lights 5m,home,low,high,$18–$35
+152,Trendy Crossbody Bag,fashion,low,high,$32–$58
+153,Instant Print Camera,electronics,low,high,$55–$95
+154,Statement Sneakers Colorful,fashion,low,high,$48–$88
+155,Selfie Stick Tripod,accessories,low,high,$16–$28
+156,Retro Y2K Sunglasses,fashion,low,high,$18–$32
+157,Mini Keychain Speaker,electronics,low,high,$14–$25
+158,Trendy Phone Case Set (3),accessories,low,high,$18–$32
+159,Pop Grip Bundle (3),accessories,low,high,$10–$18
+160,Streetwear Beanie,fashion,low,high,$16–$28
+161,Aesthetic Desk Lamp LED,home,low,high,$28–$52
+162,Mini Neon Sign USB,home,low,high,$22–$40
+163,Holographic Backpack,fashion,low,high,$28–$52
+164,K-Beauty Starter Set,beauty,low,high,$28–$52
+165,Tie-Dye Hoodie Set,fashion,low,high,$28–$52
+166,Oversized Trendy Sunglasses,fashion,low,high,$18–$32
+167,Acrylic Nail Art Kit,beauty,low,high,$22–$40
+168,Polaroid Camera Film Pack (40),electronics,low,high,$18–$32
+169,Fashionable Waist Bag,fashion,low,high,$22–$40
+170,Glitter & Marble Phone Case,accessories,low,high,$10–$18
+171,Retro Alarm Clock,home,low,high,$18–$35
+172,Boho Jewelry Set,fashion,low,high,$18–$32
+173,Photo Wall Grid Kit,home,low,high,$18–$32
+174,Aesthetic Plant Pot Set (3),garden,low,high,$16–$28
+175,Budget Mini Projector,electronics,low,high,$45–$85
+176,Budget Gaming Headset,electronics,low,high,$28–$52
+177,Cute Stationery Set,stationery,low,high,$12–$22
+178,Vinyl Wall Decals Pack,home,low,high,$12–$22
+179,Trendy Casual Watch,fashion,low,high,$28–$52
+180,Floral Print Dress,fashion,low,high,$28–$52
+181,Aesthetic Printed Tote,fashion,low,high,$14–$25
+182,Book Light Rechargeable,electronics,low,high,$10–$18
+183,Scented Candle Set (3),home,low,high,$18–$32
+184,Jade Face Roller Set,beauty,low,high,$14–$25
+185,Hair Accessories Set,beauty,low,high,$14–$25
+186,Charm Bracelet Set (3),fashion,low,high,$12–$22
+187,Enamel Pin Collection (5),accessories,low,high,$10–$18
+188,Illustrated Bullet Journal,stationery,low,high,$14–$25
+189,Reed Diffuser Set,home,low,high,$16–$28
+190,Magnetic Eyelash Kit,beauty,low,high,$16–$28
+191,Vintage-Style Sunglasses,fashion,low,high,$18–$32
+192,Patterned Socks Set (5),fashion,low,high,$14–$22
+193,Graphic Crewneck Sweatshirt,fashion,low,high,$28–$52
+194,Changeable Letter Board,home,low,high,$16–$28
+195,Smart Fitness Band Budget,electronics,low,high,$28–$52
+196,Night Light Aesthetic Lamp,home,low,high,$18–$32
+197,Casual Platform Sneakers,fashion,low,high,$32–$60
+198,Hand-Woven Crochet Tote,fashion,low,high,$22–$40
+199,USB Mini Humidifier,home,low,high,$14–$25
+200,Cute Keychain Set (5),accessories,low,high,$10–$18
+201,Waterproof Floating Speaker,electronics,low,high,$28–$52
+202,Adult Coloring Book Art Set,lifestyle,low,high,$14–$25
+203,Wireless Charging Pad Budget,electronics,low,high,$16–$28
+204,Glow-in-Dark Star Stickers,home,low,high,$8–$15
+205,Cap & Hat Set (2),fashion,low,high,$18–$32
+206,Budget Hair Curler,beauty,low,high,$22–$40
+207,Crystal Hair Clips Set,beauty,low,high,$10–$18
+208,Canvas Art Print Set (2),home,low,high,$18–$32
+209,Magnetic Bookmark Set,stationery,low,high,$8–$14
+210,UV Nail Lamp Kit,beauty,low,high,$22–$40
+211,Instant Photo Album,lifestyle,low,high,$14–$25
+212,Thermal Sticker Mini Printer,electronics,low,high,$38–$68
+213,Tumbler with Straw Lid,kitchen,low,high,$16–$28
+214,Fitness Tracker Band,electronics,mid,low,$38–$68
+215,Premium Insulated Water Bottle,lifestyle,mid,low,$22–$40
+216,Desk Organizer Set,home,mid,low,$25–$45
+217,Premium Yoga Mat,fitness,mid,low,$28–$52
+218,LED Reading Lamp,home,mid,low,$22–$40
+219,Ergonomic Wireless Mouse,electronics,mid,low,$25–$45
+220,Noise-Reducing Earplugs Premium,lifestyle,mid,low,$16–$28
+221,Meal Prep Containers Set (6),kitchen,mid,low,$20–$38
+222,Compact Air Purifier,home,mid,low,$52–$95
+223,Personal Blender,kitchen,mid,low,$32–$58
+224,Premium Cotton Bedsheet Set,home,mid,low,$38–$68
+225,Digital Kitchen Scale,kitchen,mid,low,$18–$32
+226,Leather Weekly Planner,stationery,mid,low,$14–$25
+227,Adjustable Laptop Stand,electronics,mid,low,$28–$52
+228,Cast Iron Skillet,kitchen,mid,low,$32–$58
+229,Reusable Grocery Bags Set (8),lifestyle,mid,low,$14–$25
+230,Tower Desk Fan,home,mid,low,$22–$40
+231,36-Piece Basic Toolset,tools,mid,low,$28–$52
+232,Smart Plug 4-Pack,electronics,mid,low,$22–$40
+233,Bamboo Cutting Board Set (3),kitchen,mid,low,$18–$32
+234,Essential Oil Diffuser,home,mid,low,$22–$40
+235,Electric Can Opener,kitchen,mid,low,$16–$28
+236,6-Port USB Charger Hub,electronics,mid,low,$18–$32
+237,Memory Foam Pillow,home,mid,low,$22–$40
+238,Stainless Steel Pot Set (3),kitchen,mid,low,$35–$65
+239,Digital Blood Pressure Monitor,health,mid,low,$25–$45
+240,Under-Desk Drawer Organizer,home,mid,low,$18–$32
+241,Cordless Handheld Vacuum,home,mid,low,$35–$65
+242,Digital Luggage Scale,travel,mid,low,$12–$22
+243,Herb Garden Starter Kit,garden,mid,low,$18–$32
+244,Resistance Training Set,fitness,mid,low,$22–$40
+245,Wooden Minimalist Watch,fashion,mid,low,$32–$58
+246,Leather Card Holder,fashion,mid,low,$18–$32
+247,Multi-Level Shoe Rack,home,mid,low,$28–$52
+248,Compact Dehumidifier,home,mid,low,$42–$78
+249,Spice Rack Set (3-Tier),kitchen,mid,low,$18–$32
+250,Silicone Baking Mats Set (2),kitchen,mid,low,$14–$25
+251,Under-Bed Storage Boxes (2),home,mid,low,$18–$32
+252,Stainless Steel Thermos 1L,kitchen,mid,low,$18–$32
+253,Electric Egg Cooker,kitchen,mid,low,$18–$32
+254,Budget Cordless Drill,tools,mid,low,$42–$78
+255,Bike Helmet Commuter,fitness,mid,low,$32–$58
+256,Knee Brace Support,health,mid,low,$18–$32
+257,Premium Sunscreen SPF50,beauty,mid,low,$12–$22
+258,Leather Notebook Cover,stationery,mid,low,$18–$32
+259,Wall-Mounted Key Holder,home,mid,low,$12–$22
+260,Collapsible Silicone Bowls Set,kitchen,mid,low,$14–$25
+261,Portable Folding Chair,outdoor,mid,low,$28–$52
+262,Basic Camping Stove Burner,outdoor,mid,low,$22–$40
+263,Car Seat Cushion,automotive,mid,low,$22–$40
+264,Wrist Brace Support,health,mid,low,$14–$25
+265,Smart Power Strip Timer,electronics,mid,low,$22–$40
+266,Kitchen Peeler & Slicer Set,kitchen,mid,low,$12–$22
+267,Wooden Book Stand,stationery,mid,low,$12–$22
+268,Portable Tire Air Pump,automotive,mid,low,$25–$45
+269,Stackable Drawer Organizer Set,home,mid,low,$18–$32
+270,Whetstone Knife Sharpener Set,kitchen,mid,low,$18–$32
+271,Heavy-Duty Deadbolt Lock,home,mid,low,$22–$40
+272,Budget Indoor Security Camera,electronics,mid,low,$25–$45
+273,Carbon Fiber Card Wallet,fashion,mid,low,$18–$32
+274,Pour-Over Coffee Maker,kitchen,mid,low,$22–$40
+275,UV Phone Sanitizer Box,health,mid,low,$18–$32
+276,Budget Electric Toothbrush,health,mid,low,$22–$40
+277,Non-Slip Bath Mat,home,mid,low,$14–$25
+278,Bamboo Shelf Organizer,home,mid,low,$22–$40
+279,Collapsible Dish Drying Rack,kitchen,mid,low,$18–$32
+280,Digital Weather Station,home,mid,low,$22–$40
+281,Hand Grip Strengthener Set,fitness,mid,low,$10–$18
+282,Premium Resistance Bands Set (5),fitness,mid,low,$18–$32
+283,Foldable Step Stool,home,mid,low,$18–$32
+284,Over-Ear Headphones,electronics,mid,mid,$48–$88
+285,Weekend Travel Duffel Bag,fashion,mid,mid,$42–$78
+286,Instant Camera with Film Pack,electronics,mid,mid,$55–$95
+287,Casual Analog Wristwatch,fashion,mid,mid,$58–$105
+288,Premium Board Game Set,lifestyle,mid,mid,$28–$52
+289,Mechanical Wireless Keyboard,electronics,mid,mid,$35–$65
+290,Compact Air Fryer 3L,kitchen,mid,mid,$72–$130
+291,Trail Running Shoes,fitness,mid,mid,$55–$95
+292,Insulated Backpack Cooler,outdoor,mid,mid,$38–$68
+293,Wi-Fi Digital Photo Frame,electronics,mid,mid,$42–$78
+294,Mini Portable Projector,electronics,mid,mid,$88–$160
+295,Standing Desk Converter,home,mid,mid,$78–$140
+296,Weighted Blanket 8kg,home,mid,mid,$52–$95
+297,Countertop Herb Garden Kit,home,mid,mid,$38–$68
+298,1000-Piece Premium Puzzle Set,lifestyle,mid,mid,$22–$40
+299,Premium Bike Helmet,fitness,mid,mid,$35–$65
+300,Camping Hammock with Straps,outdoor,mid,mid,$38–$68
+301,Rechargeable Electric Toothbrush,health,mid,mid,$45–$82
+302,Compact Countertop Microwave,kitchen,mid,mid,$78–$140
+303,Compact 1-Inch Sensor Camera,electronics,mid,mid,$130–$230
+304,Smart Bulbs Set (4-Pack),electronics,mid,mid,$28–$52
+305,Compact Mechanical Keyboard,electronics,mid,mid,$55–$95
+306,Leather Loafers Casual,fashion,mid,mid,$58–$105
+307,Anti-Theft Laptop Backpack,fashion,mid,mid,$42–$78
+308,Portable SSD 1TB,electronics,mid,mid,$65–$115
+309,Smart Body Composition Scale,health,mid,mid,$25–$45
+310,Wireless Gaming Headset,electronics,mid,mid,$55–$95
+311,Electric Burr Coffee Grinder,kitchen,mid,mid,$48–$88
+312,Floating Wine Rack Wooden,home,mid,mid,$28–$52
+313,Yoga Block & Strap Set,fitness,mid,mid,$18–$32
+314,Multi-Tool Pocket Knife,outdoor,mid,mid,$28–$52
+315,Silicone Cooking Utensil Set (6),kitchen,mid,mid,$18–$32
+316,RC Racing Car,lifestyle,mid,mid,$42–$78
+317,LEGO Architecture Set,lifestyle,mid,mid,$48–$88
+318,Wireless Charging Pad 15W,electronics,mid,mid,$18–$32
+319,Merino Wool Scarf,fashion,mid,mid,$35–$65
+320,Slim Leather Laptop Sleeve,electronics,mid,mid,$28–$52
+321,Portable Bluetooth Speaker Mid,electronics,mid,mid,$35–$65
+322,Vegetable Spiralizer Pro,kitchen,mid,mid,$22–$40
+323,6-Cup Rice Cooker,kitchen,mid,mid,$35–$65
+324,Bamboo Desk Organizer Set,home,mid,mid,$22–$40
+325,Stick Cordless Vacuum,home,mid,mid,$78–$140
+326,Folding Exercise Bike,fitness,mid,mid,$120–$220
+327,Adjustable Dumbbell Set 10kg Pair,fitness,mid,mid,$48–$88
+328,Smart Digital Door Lock,home,mid,mid,$78–$140
+329,Water Filter Pitcher,kitchen,mid,mid,$28–$52
+330,Solar String Lights 20m,home,mid,mid,$22–$40
+331,Ceramic Non-Stick Cookware Set,kitchen,mid,mid,$65–$115
+332,RFID Slim Leather Wallet,fashion,mid,mid,$22–$40
+333,Smart TV Stick 4K,electronics,mid,mid,$35–$65
+334,Portable 15-Inch Monitor,electronics,mid,mid,$130–$230
+335,Mini Espresso Maker,kitchen,mid,mid,$55–$95
+336,Polaroid-Style Instant Camera,electronics,mid,mid,$55–$95
+337,Hardcover Dotted Journal Set,stationery,mid,mid,$18–$32
+338,Fleece Sherpa Jacket,fashion,mid,mid,$35–$65
+339,Lightweight Trail Hiking Shoes,fitness,mid,mid,$55–$95
+340,Electric Pepper & Salt Grinder Set,kitchen,mid,mid,$22–$40
+341,3-in-1 Braided Cable Pack,electronics,mid,mid,$12–$22
+342,Solar Wireless Power Bank,electronics,mid,mid,$28–$52
+343,Mesh Ergonomic Office Chair Basic,home,mid,mid,$88–$155
+344,Bluetooth Turntable Record Player,electronics,mid,mid,$78–$140
+345,Electric Tabletop Grill,kitchen,mid,mid,$48–$88
+346,Wi-Fi Smart Security Camera,electronics,mid,mid,$42–$78
+347,3-Tier Rotating Spice Rack,kitchen,mid,mid,$22–$40
+348,Stretched Canvas Wall Art Set,home,mid,mid,$28–$52
+349,Stainless Steel Mixing Bowls Set,kitchen,mid,mid,$28–$52
+350,Electric Wine Opener,kitchen,mid,mid,$22–$40
+351,Travel Compression Bags Set,travel,mid,mid,$18–$32
+352,Yoga Wheel,fitness,mid,mid,$22–$40
+353,Smart Wi-Fi Plug 4-Pack,electronics,mid,mid,$25–$45
+354,Mid-Range Smartwatch GPS,electronics,mid,high,$120–$220
+355,True Wireless ANC Earbuds,electronics,mid,high,$150–$280
+356,Fashion Designer Sneakers,fashion,mid,high,$110–$200
+357,Weekender Leather Travel Bag,fashion,mid,high,$75–$135
+358,Bluetooth Bookshelf Speaker,electronics,mid,high,$90–$165
+359,4K Action Camera,electronics,mid,high,$180–$330
+360,Premium Gaming Headset,electronics,mid,high,$80–$145
+361,GPS Drone Entry-Level,electronics,mid,high,$180–$330
+362,Fashion Crossbody Bag,fashion,mid,high,$68–$125
+363,Premium Yoga Mat Set with Bag,fitness,mid,high,$58–$105
+364,Hydration Smart Water Bottle,electronics,mid,high,$52–$95
+365,All-in-One Karaoke System,electronics,mid,high,$55–$100
+366,Branded Acetate Sunglasses,fashion,mid,high,$85–$155
+367,Mini Smart Refrigerator,home,mid,high,$95–$175
+368,Multi-Device Wireless Charging Stand,electronics,mid,high,$28–$52
+369,Sneaker Cleaning & Care Kit,fashion,mid,high,$22–$40
+370,Premium Anti-Theft Backpack,fashion,mid,high,$100–$185
+371,Smart Health Ring,electronics,mid,high,$150–$280
+372,4K Waterproof Action Camera,electronics,mid,high,$200–$360
+373,DualSense Controller & Stand Bundle,electronics,mid,high,$75–$135
+374,Nintendo Switch Console,electronics,mid,high,$220–$400
+375,Electric Longboard,outdoor,mid,high,$250–$450
+376,Premium Inline Rollerblade Set,fitness,mid,high,$120–$220
+377,5-Ply Stainless Steel Cookware Set,kitchen,mid,high,$120–$220
+378,Cold Brew Coffee Maker Set,kitchen,mid,high,$42–$78
+379,Vitamin & Supplement Bundle,health,mid,high,$52–$95
+380,Premium Duffel Gym Bag,fitness,mid,high,$58–$105
+381,Slim Business Laptop Bag,fashion,mid,high,$52–$95
+382,Portable Karaoke Bluetooth Mic,electronics,mid,high,$55–$95
+383,Smart Outdoor Pizza Oven,kitchen,mid,high,$220–$400
+384,Hardshell Carry-On Luggage,travel,mid,high,$100–$185
+385,ANC True Wireless Earphones,electronics,mid,high,$120–$220
+386,Premium Over-Ear Wireless Headphones,electronics,mid,high,$130–$240
+387,Smart Connected Jump Rope,fitness,mid,high,$48–$88
+388,Robot Mop & Vacuum Combo,home,mid,high,$180–$330
+389,Hiking Daypack 30L,outdoor,mid,high,$75–$135
+390,Luxury Silk Pillowcase Set (2),home,mid,high,$52–$95
+391,Premium Curved LED Lamp,home,mid,high,$52–$95
+392,Fashion GPS Smartwatch,fashion,mid,high,$130–$240
+393,Smart WiFi Thermostat,electronics,mid,high,$120–$220
+394,Shiatsu Electric Foot Massager,health,mid,high,$58–$105
+395,Cordless Neck & Shoulder Massager,health,mid,high,$42–$78
+396,Smart Air Fryer 5.5L,kitchen,mid,high,$120–$220
+397,Sonic Electric Toothbrush,health,mid,high,$55–$100
+398,Complete Beard Grooming Kit,beauty,mid,high,$42–$78
+399,Multi-Step Premium Skincare Set,beauty,mid,high,$78–$140
+400,Bifold Leather Wallet,fashion,mid,high,$45–$82
+401,Polarized Sport Sunglasses,fashion,mid,high,$58–$105
+402,Compact Mirrorless Camera,electronics,mid,high,$280–$510
+403,Camera Accessories Bundle,electronics,mid,high,$65–$115
+404,True Wireless Sports Earphones,electronics,mid,high,$75–$135
+405,Smart Sunrise Alarm Clock,electronics,mid,high,$52–$95
+406,Portable Power Station 500Wh,electronics,mid,high,$280–$510
+407,Ergonomic Racing Gaming Chair,home,mid,high,$220–$400
+408,Electric Heated Blanket,home,mid,high,$65–$115
+409,Smart Indoor Herb Garden Kit,garden,mid,high,$75–$135
+410,Premium Cocktail Making Set,kitchen,mid,high,$55–$95
+411,Enameled Cast Iron Dutch Oven,kitchen,mid,high,$78–$140
+412,Percussion Massage Gun,health,mid,high,$75–$135
+413,Folding Electric Fat Tire Bike,outdoor,mid,high,$380–$680
+414,Premium Inflatable Paddleboard Set,outdoor,mid,high,$300–$540
+415,MIPS Cycling Helmet,fitness,mid,high,$100–$185
+416,Personalized Leather Journal,stationery,mid,high,$28–$52
+417,Instax Wide Instant Camera,electronics,mid,high,$95–$175
+418,Portable Projector Screen 100-inch,electronics,mid,high,$55–$95
+419,Modular Floating Shelf System,home,mid,high,$65–$115
+420,Smart Automatic Pet Feeder,pets,mid,high,$75–$135
+421,Designer Luxury Phone Case,accessories,mid,high,$55–$95
+422,Carbon Fiber Phone Stand,accessories,mid,high,$22–$40
+423,Premium Multi-Cooker 6L,kitchen,mid,high,$120–$220
+424,Premium ANC Over-Ear Headphones,electronics,high,low,$200–$380
+425,Bean-to-Cup Coffee Machine,kitchen,high,low,$180–$340
+426,Full-Grain Leather Wallet,fashion,high,low,$75–$135
+427,Ergonomic Executive Office Chair,home,high,low,$280–$510
+428,Lacquer Fountain Pen Set,stationery,high,low,$55–$95
+429,1000TC Egyptian Cotton Bedding Set,home,high,low,$140–$250
+430,Crystal Wine Decanter & Glasses,home,high,low,$55–$95
+431,HEPA Smart Air Purifier Large,home,high,low,$220–$400
+432,Full-Grain Leather Desk Organizer,home,high,low,$58–$105
+433,Electric Height-Adjustable Desk,home,high,low,$300–$540
+434,8-Piece Professional Knife Set,kitchen,high,low,$155–$280
+435,Smart Learning Thermostat,electronics,high,low,$110–$200
+436,Premium Merino Wool Blanket,home,high,low,$98–$180
+437,Multi-Stage Water Purifier System,kitchen,high,low,$185–$340
+438,Pure Cashmere Scarf,fashion,high,low,$85–$155
+439,Full-Grain Leather Executive Briefcase,fashion,high,low,$175–$320
+440,Burr Coffee Grinder Pro,kitchen,high,low,$135–$245
+441,Ergonomic Lumbar Support Cushion,home,high,low,$120–$220
+442,Hardshell 3-Piece Luggage Set,travel,high,low,$200–$360
+443,Double-Wall Titanium Flask,lifestyle,high,low,$48–$88
+444,Premium Leather Passport Wallet,travel,high,low,$42–$78
+445,Superfine Merino Wool Crewneck,fashion,high,low,$110–$200
+446,Classic Polarized Sunglasses Premium,fashion,high,low,$130–$240
+447,Smart Door Lock with Video,home,high,low,$180–$330
+448,Dyson-Style Cordless Vacuum,home,high,low,$280–$510
+449,Commercial-Grade Blender,kitchen,high,low,$220–$400
+450,Cast Iron Reversible Griddle Grill,kitchen,high,low,$68–$125
+451,5-Camera Smart Home Security Bundle,electronics,high,low,$280–$510
+452,Premium 10-Inch Hybrid Mattress,home,high,low,$400–$720
+453,Premium Whey Protein 5lb Set,health,high,low,$78–$140
+454,Complete Home Yoga Equipment Set,fitness,high,low,$78–$140
+455,1000-Lumen Tactical Flashlight,outdoor,high,low,$42–$78
+456,4-Person Premium Camping Tent,outdoor,high,low,$220–$400
+457,Full-Grain Leather Messenger Bag,fashion,high,low,$130–$240
+458,Automatic Double Watch Winder,fashion,high,low,$88–$160
+459,Wireless Ergonomic Mouse Premium,electronics,high,low,$55–$95
+460,Solid Bamboo Bedroom Furniture Set,home,high,low,$480–$880
+461,10-Piece Hard-Anodized Cookware Set,kitchen,high,low,$240–$440
+462,Smart 10-inch Display Hub,electronics,high,low,$130–$240
+463,Handcrafted Marble Chess Set,lifestyle,high,low,$98–$180
+464,60-Pint Energy-Star Dehumidifier,home,high,low,$185–$340
+465,Chemex Pour-Over Coffee Set,kitchen,high,low,$68–$125
+466,Pure Cashmere Throw Blanket,home,high,low,$120–$220
+467,Lambskin Leather Driving Gloves,fashion,high,low,$88–$160
+468,Professional Cordless Hair Clipper,beauty,high,low,$75–$135
+469,6L Cool-Mist Ultrasonic Humidifier,home,high,low,$88–$160
+470,20-Piece Cordless Power Tool Set,tools,high,low,$280–$510
+471,Yoga Bolster & Meditation Set,fitness,high,low,$55–$95
+472,Immersion Circulator Sous Vide,kitchen,high,low,$130–$240
+473,Smart Indoor Garden 24-Pod System,garden,high,low,$130–$240
+474,Fingerprint Biometric Home Safe,home,high,low,$120–$220
+475,Ergonomic Kneeling Chair,home,high,low,$180–$330
+476,Solid Oak Coffee Table,home,high,low,$380–$680
+477,Premium Wireless Bookshelf Speakers,electronics,high,low,$220–$400
+478,Medical-Grade Posture Corrector,health,high,low,$55–$95
+479,Premium Whiskey Decanter Set,lifestyle,high,low,$120–$220
+480,Hand-Painted Fine Bone China Tea Set,kitchen,high,low,$120–$220
+481,Smart Wi-Fi Body Composition Scale,health,high,low,$55–$95
+482,Rechargeable Camping Lantern Pro,outdoor,high,low,$48–$88
+483,Full-Grain Leather Cardholder,fashion,high,low,$55–$95
+484,100% Mulberry Silk Robe,fashion,high,low,$130–$240
+485,Crystal Whiskey Decanter & Glasses,lifestyle,high,low,$88–$160
+486,Smart Wi-Fi Garage Door Opener,home,high,low,$130–$240
+487,Luxury Spa Home Gift Set,beauty,high,low,$98–$180
+488,Ebony Wood Watch Display Box,fashion,high,low,$75–$135
+489,Multi-Function Pressure Cooker 8L,kitchen,high,low,$130–$240
+490,Wireless White Noise Machine,health,high,low,$48–$88
+491,Heavy-Duty Wall-Mounted Pull-Up Bar,fitness,high,low,$55–$95
+492,IP66 Outdoor Bluetooth Speaker,electronics,high,low,$130–$240
+493,Wind-Resistant Carbon Fiber Umbrella,lifestyle,high,low,$75–$135
+494,Premium Golf Accessories Bundle,sports,high,low,$75–$135
+495,Smart Robot Vacuum Cleaner,home,high,mid,$320–$580
+496,Semi-Pro Espresso Machine,kitchen,high,mid,$380–$680
+497,Pebbled Leather Tote Bag,fashion,high,mid,$420–$750
+498,Smart Home Hub Display,electronics,high,mid,$125–$225
+499,Temperature-Control Smart Kettle,kitchen,high,mid,$95–$175
+500,Smart HEPA Air Purifier Pro,electronics,high,mid,$200–$360
+501,10-Piece Clad Stainless Cookware,kitchen,high,mid,$260–$480
+502,Slim Bi-Fold Designer Wallet,fashion,high,mid,$160–$290
+503,4K Smart Video Doorbell,electronics,high,mid,$140–$255
+504,Sit-Stand Electric Desk 140cm,home,high,mid,$340–$620
+505,Professional High-Speed Blender,kitchen,high,mid,$175–$320
+506,Double-Faced Wool Overcoat,fashion,high,mid,$240–$440
+507,Programmable Color LED Lighting Kit,electronics,high,mid,$110–$200
+508,Full-Grain Leather Laptop Bag,fashion,high,mid,$185–$340
+509,Premium Hybrid ANC Earbuds,electronics,high,mid,$220–$400
+510,8-Camera AI Home Security System,electronics,high,mid,$260–$480
+511,Professional Chef Knife Set,kitchen,high,mid,$200–$360
+512,19mm Mulberry Silk Pillowcase Set (4),home,high,mid,$100–$185
+513,French Door Smart Refrigerator,home,high,mid,"$1,800–$3,200"
+514,Full-Frame Mirrorless Camera,electronics,high,mid,"$1,800–$3,200"
+515,Mid-Drive Electric Commuter Bike,outdoor,high,mid,"$1,200–$2,200"
+516,AI-Powered Washing Machine,home,high,mid,"$800–$1,450"
+517,High-End Gaming Desktop PC,electronics,high,mid,"$1,200–$2,200"
+518,32-Inch 4K UHD Designer Monitor,electronics,high,mid,$420–$750
+519,Italian Leather Sectional Sofa,home,high,mid,"$2,200–$4,000"
+520,Titanium Aviator Sunglasses,fashion,high,mid,$220–$400
+521,Solid Hardwood Dining Table,home,high,mid,"$900–$1,600"
+522,1000TC Sateen Luxury Bedding Set,home,high,mid,$280–$510
+523,24-Bottle Wine Cooler,kitchen,high,mid,$280–$510
+524,Commercial-Grade Folding Treadmill,fitness,high,mid,"$700–$1,280"
+525,Zero-Gravity Massage Chair,home,high,mid,"$900–$1,600"
+526,Kamado Charcoal Smart Grill,kitchen,high,mid,$380–$680
+527,Italian Leather Portfolio Briefcase,fashion,high,mid,$280–$510
+528,Carbon Plate Marathon Shoes,fitness,high,mid,$160–$290
+529,Commercial Spin Bike,fitness,high,mid,$500–$900
+530,Aromatherapy Luxury Bath Set,beauty,high,mid,$120–$220
+531,Rare Tea Selection Luxury Set,kitchen,high,mid,$140–$255
+532,Hi-Fi Active Bookshelf Speakers Pair,electronics,high,mid,$320–$580
+533,Luxury Scented Candle Set,home,high,mid,$120–$220
+534,High-Density Feather Sofa Cushions (4),home,high,mid,$140–$255
+535,Goodyear-Welted Oxford Shoes,fashion,high,mid,$280–$510
+536,Premium Handbag Organizer Set,fashion,high,mid,$75–$135
+537,Microchip Smart Pet Door,pets,high,mid,$200–$360
+538,Mid-Range GPS Mapping Drone,electronics,high,mid,$500–$900
+539,Robot Lawn Mower 1000sqm,garden,high,mid,"$700–$1,280"
+540,Smart Solar Pool Heater,outdoor,high,mid,$320–$580
+541,Professional Sous Vide Immersion Set,kitchen,high,mid,$130–$240
+542,Professional Stand Mixer,kitchen,high,mid,$300–$540
+543,Energy-Star Whole-Home Dehumidifier,home,high,mid,$380–$680
+544,Laser Robot Vacuum & Mop Premium,home,high,mid,$500–$900
+545,Engineered Hi-Fi Portable Speaker,electronics,high,mid,$280–$510
+546,Premium Acetate Prescription Frame,health,high,mid,$200–$360
+547,Cashmere Luxury Throw Blanket,home,high,mid,$240–$440
+548,Hard-Shell Spinner Luggage Set (3pc),travel,high,mid,$320–$580
+549,Dolby Atmos Smart Home Theater,electronics,high,mid,"$800–$1,450"
+550,Cognac Leather Armchair,home,high,mid,"$700–$1,280"
+551,Power-Lift Premium Recliner,home,high,mid,"$700–$1,280"
+552,Planar Magnetic Gaming Headset,electronics,high,mid,$200–$360
+553,Smart Countertop Convection Oven,kitchen,high,mid,$280–$510
+554,Brushless Cordless Impact Driver Set,tools,high,mid,$200–$360
+555,Suede Chelsea Boots,fashion,high,mid,$220–$400
+556,Commercial Gym Half-Rack Bundle,fitness,high,mid,"$600–$1,100"
+557,Upholstered King Bedroom Set,home,high,mid,"$1,800–$3,200"
+558,Dual-Zone Large Air Fryer Oven,kitchen,high,mid,$200–$360
+559,Built-In Wi-Fi Dishwasher,home,high,mid,"$600–$1,100"
+560,4K Laser Smart Projector,electronics,high,mid,"$600–$1,100"
+561,Organic Pima Cotton Bathrobe Set (2),fashion,high,mid,$180–$330
+562,Motorized Smart Window Blind System,home,high,mid,$320–$580
+563,Orthopedic Bolster Dog Bed XL,pets,high,mid,$120–$220
+564,Tungsten Carbon Fiber Card Wallet,fashion,high,mid,$95–$175
+565,iPhone 15 Pro Max 1TB,electronics,high,high,"$1,200–$1,600"
+566,MacBook Pro 16-Inch M3 Max,electronics,high,high,"$2,800–$4,200"
+567,OLED 77-Inch 4K Smart TV,electronics,high,high,"$2,000–$3,800"
+568,Swiss Luxury Chronograph Watch,fashion,high,high,"$4,500–$12,000"
+569,Iconic Designer Leather Handbag,fashion,high,high,"$2,200–$5,500"
+570,Premium ANC Headphones Flagship,electronics,high,high,$350–$620
+571,High-End Gaming Laptop RTX 4090,electronics,high,high,"$2,500–$4,500"
+572,Oversized Luxury Designer Sunglasses,fashion,high,high,$350–$750
+573,Dolby Atmos Premium Home Theater,electronics,high,high,"$1,800–$3,500"
+574,Niche Luxury Perfume Collection,beauty,high,high,$280–$600
+575,Titanium Ceramic Smartwatch Premium,electronics,high,high,$500–$900
+576,Handcrafted Leather Oxford Shoes,fashion,high,high,"$500–$1,100"
+577,Full-Frame Sensor Mirrorless Pro Camera,electronics,high,high,"$2,800–$5,500"
+578,Designer Lambskin Leather Jacket,fashion,high,high,"$1,200–$2,800"
+579,Carbon & Titanium Premium E-Bike,outdoor,high,high,"$3,500–$7,000"
+580,Reference-Grade Floorstanding Speakers,electronics,high,high,"$2,200–$5,500"
+581,Diamond & Sapphire Jewelry Set,fashion,high,high,"$3,500–$12,000"
+582,Bespoke Hard-Shell Luxury Luggage Set,travel,high,high,"$800–$1,800"
+583,8K Mapping Cinematic Drone,electronics,high,high,"$1,800–$3,500"
+584,Premium Wellness & Recovery Spa Kit,beauty,high,high,$350–$700
+585,Samsung Galaxy S25 Ultra 1TB,electronics,high,high,"$1,200–$1,600"
+586,Limited-Edition Gaming Console Bundle,electronics,high,high,"$600–$1,200"
+587,Loro Piana-Style Cashmere Overcoat,fashion,high,high,"$1,800–$4,500"
+588,Hand-Engraved Dress Watch,fashion,high,high,"$2,800–$9,000"
+589,Structured Monogram Leather Tote,fashion,high,high,"$1,800–$4,500"
+590,8K Laser Home Cinema Projector,electronics,high,high,"$3,500–$8,000"
+591,Built-In Smart Refrigerator Premium,home,high,high,"$2,800–$5,500"
+592,La Marzocco-Style Espresso Machine,kitchen,high,high,"$1,200–$2,800"
+593,Built-In Wine & Spirits Cellar,kitchen,high,high,"$2,200–$5,500"
+594,Self-Emptying Robot Vacuum Pro,home,high,high,"$800–$1,600"
+595,Smart Home Full Bundle Pro,electronics,high,high,"$500–$1,100"
+596,Level-2 Home EV Charger,automotive,high,high,"$600–$1,200"
+597,18K Gold & Diamond Bracelet,fashion,high,high,"$1,800–$6,000"
+598,Pavé Diamond Drop Earrings,fashion,high,high,"$2,200–$8,000"
+599,Globe-Trotter-Style Luxury Luggage,travel,high,high,"$900–$2,200"
+600,Cinema-Grade Photography Bundle,electronics,high,high,"$3,500–$8,000"
+601,Full-Grain Hand-Stitched Leather Sofa,home,high,high,"$4,500–$9,000"
+602,Frameless Glass Steam Shower System,home,high,high,"$2,800–$6,000"
+603,Luxury Smart Home Automation Bundle,electronics,high,high,"$3,500–$8,000"
+604,Ottoman King Platform Bed Frame,home,high,high,"$2,200–$5,500"
+605,Blade & Steel Premium Golf Club Set,sports,high,high,"$1,200–$2,800"
+606,Carbon Ski & Boot Bundle,sports,high,high,"$1,200–$2,800"
+607,Big Wave Surfboard,sports,high,high,"$800–$1,800"
+608,Titanium-Frame Road Bicycle,outdoor,high,high,"$2,800–$6,500"
+609,Executive Wellness Retreat Package,health,high,high,"$1,800–$4,500"
+610,Full Kitchen Appliance Bundle Premium,kitchen,high,high,"$3,500–$8,000"
+611,Savant-Style Pro Smart Home System,electronics,high,high,"$4,500–$12,000"
+612,Freestanding Marble Clawfoot Bathtub,home,high,high,"$2,800–$6,500"
+613,Italian Marble Coffee Table,home,high,high,"$1,200–$3,200"
+614,4-Person Indoor Infrared Sauna,home,high,high,"$2,800–$6,500"
+615,Samsung 98-Inch MicroLED TV,electronics,high,high,"$4,500–$12,000"
+616,Signature Designer Belt,fashion,high,high,$350–$750
+617,Medium-Format Portrait Camera,electronics,high,high,"$5,500–$12,000"
+618,Hi-Fi Reference Turntable System,electronics,high,high,"$1,200–$3,200"
+619,Custom-Initials Business Class Luggage,travel,high,high,"$1,200–$2,800"
+620,Smart BBQ & Smoker System,kitchen,high,high,"$600–$1,200"
+621,Luxury Silk & Linen Tie Collection,fashion,high,high,$180–$380
+622,Poltrona Frau-Style Executive Chair,home,high,high,"$2,200–$5,500"
+623,Limited Edition Signed Canvas Art,home,high,high,"$1,200–$3,500"
+624,InBody-Style High-Precision Health Scale,health,high,high,$350–$700
+625,Audeze LCD-Style Planar Headphones,electronics,high,high,"$800–$1,800"
+626,La Cornue-Style Luxury Range,kitchen,high,high,"$4,500–$12,000"
+627,Oakworks-Style Professional Massage Table,health,high,high,"$1,200–$3,200"
+628,Hand-Woven Cashmere Throw Collection,home,high,high,"$600–$1,600"
+629,TAG Heuer-Style Luxury Smartwatch,electronics,high,high,"$900–$2,200"
+630,Goyard-Style Luxury Designer Backpack,fashion,high,high,"$1,800–$4,500"
+631,Annex Rooftop Tent Premium,outdoor,high,high,"$1,200–$2,800"
+632,Hand-Guilloché Chronograph Watch,fashion,high,high,"$3,500–$9,000"
+633,Zeiss-Grade Prime Lens Set,electronics,high,high,"$3,500–$9,000"
+634,Ajax-Style Smart Security System Pro,electronics,high,high,"$800–$1,800"
+635,Polished Stainless Luxury Desk Clock,home,high,high,$350–$750
