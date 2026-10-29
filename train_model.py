@@ -1,21 +1,11 @@
-"""
-train_model.py
-Trains a K-Means clustering model on synthetic Mall-Customer-style data
-(Age, Annual Income, Spending Score) and saves:
-  - model/scaler.pkl
-  - model/kmeans_model.pkl
-  - data/mall_customers.csv (the training data, for reference)
-
-Income is stored as Annual_Income_k (thousands of USD).
-Range: $1.2k–$240k  ≈  ₹1 lakh – ₹2 crore  (at ~₹83/USD)
-"""
-
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 import joblib
 import os
+
+from spending_score import calculate_spending_score
 
 np.random.seed(42)
 
@@ -25,7 +15,8 @@ os.makedirs("data", exist_ok=True)
 # ---------------------------------------------------------
 # 1. Generate synthetic "Mall Customer" style dataset
 #    (mirrors the well-known 5-segment structure of the
-#    classic Mall_Customers.csv dataset used in tutorials)
+#    classic Mall_Customers.csv dataset used in tutorials),
+#    with Spending_Score derived from purchase behaviour
 #
 #    Income bands (Annual_Income_k = USD thousands):
 #      low   : 1.2 –  40   ($1.2k–$40k   ≈ ₹1L–₹33L)
@@ -33,41 +24,65 @@ os.makedirs("data", exist_ok=True)
 #      high  : 120 – 240   ($120k–$240k  ≈ ₹1Cr–₹2Cr)
 # ---------------------------------------------------------
 
-def make_segment(n, age_range, income_range, score_range):
+# Purchase-behaviour bands used to generate realistic raw purchase data.
+# The Spending_Score is NOT sampled directly -- it is computed from these
+# raw values with calculate_spending_score(), the exact same function
+# server.py uses for live customers.
+#   monthly spend in ₹/month, purchase frequency in purchases/month
+SPEND_BANDS = {
+    "low":  {"monthly_spend": (600, 3_000),     "monthly_freq": (0.3, 2.5)},
+    "mid":  {"monthly_spend": (3_000, 15_000),  "monthly_freq": (2.5, 5.5)},
+    "high": {"monthly_spend": (12_000, 75_000), "monthly_freq": (5.0, 9.5)},
+}
+
+
+def make_segment(n, age_range, income_range, spend_band):
     age = np.random.randint(age_range[0], age_range[1], n)
     income = np.random.normal((income_range[0]+income_range[1])/2,
                                (income_range[1]-income_range[0])/8, n)
-    score = np.random.normal((score_range[0]+score_range[1])/2,
-                              (score_range[1]-score_range[0])/8, n)
     income = np.clip(income, 1.0, 250.0)
-    score = np.clip(score, 1, 100)
-    return age, income, score
+
+    band = SPEND_BANDS[spend_band]
+    # Monthly spend is sampled in log space (amounts span orders of magnitude).
+    log_lo, log_hi = np.log(band["monthly_spend"][0]), np.log(band["monthly_spend"][1])
+    monthly_spend = np.exp(np.random.normal((log_lo + log_hi)/2, (log_hi - log_lo)/8, n))
+    freq_lo, freq_hi = band["monthly_freq"]
+    monthly_freq = np.clip(np.random.normal((freq_lo + freq_hi)/2, (freq_hi - freq_lo)/8, n), 0.05, None)
+
+    period = np.random.randint(1, 25, n)                       # 1-24 months
+    purchase_count = np.maximum(1, np.round(monthly_freq * period)).astype(int)
+    total_spent = np.round(monthly_spend * period, 2)
+    return age, income, total_spent, purchase_count, period
 
 segments = [
-    # age_range, income_range($k), score_range
-    ((18, 35), (1.2, 40),   (60, 95)),   # low income,  high spend  -> Enthusiastic Spender
-    ((25, 45), (120, 240),  (60, 95)),   # high income, high spend  -> Premium High-Spender
-    ((30, 60), (120, 240),  (5, 35)),    # high income, low spend   -> Frugal High-Earner
-    ((20, 40), (1.2, 40),   (5, 35)),    # low income,  low spend   -> Budget-Conscious Customer
-    ((25, 55), (40, 120),   (35, 65)),   # mid income,  mid spend   -> Balanced Spender
-    ((22, 45), (1.2, 40),   (35, 65)),   # low income,  mid spend   -> Value-Focused Spender
-    ((25, 50), (40, 120),   (5, 35)),    # mid income,  low spend   -> Cautious Saver
-    ((22, 50), (40, 120),   (60, 95)),   # mid income,  high spend  -> Active Spender
-    ((30, 60), (120, 240),  (35, 65)),   # high income, mid spend   -> Steady High-Income Spender
+    # age_range, income_range($k), spend band
+    ((18, 35), (1.2, 40),   "high"),   # low income,  high spend  -> Enthusiastic Spender
+    ((25, 45), (120, 240),  "high"),   # high income, high spend  -> Premium High-Spender
+    ((30, 60), (120, 240),  "low"),    # high income, low spend   -> Frugal High-Earner
+    ((20, 40), (1.2, 40),   "low"),    # low income,  low spend   -> Budget-Conscious Customer
+    ((25, 55), (40, 120),   "mid"),    # mid income,  mid spend   -> Balanced Spender
+    ((22, 45), (1.2, 40),   "mid"),    # low income,  mid spend   -> Value-Focused Spender
+    ((25, 50), (40, 120),   "low"),    # mid income,  low spend   -> Cautious Saver
+    ((22, 50), (40, 120),   "high"),   # mid income,  high spend  -> Active Spender
+    ((30, 60), (120, 240),  "mid"),    # high income, mid spend   -> Steady High-Income Spender
 ]
 
 rows = []
 n_per_segment = 120          # 9 × 120 = 1080 rows for good coverage
 genders = ["Male", "Female"]
 
-for age_r, income_r, score_r in segments:
-    age, income, score = make_segment(n_per_segment, age_r, income_r, score_r)
-    for a, inc, sc in zip(age, income, score):
+for age_r, income_r, spend_band in segments:
+    age, income, total_spent, purchase_count, period = make_segment(
+        n_per_segment, age_r, income_r, spend_band)
+    for a, inc, spent, cnt, months in zip(age, income, total_spent, purchase_count, period):
         rows.append({
             "Gender": np.random.choice(genders),
             "Age": int(a),
             "Annual_Income_k": round(float(inc), 1),
-            "Spending_Score": round(float(sc), 1),
+            "Total_Amount_Spent": float(spent),
+            "Purchase_Count": int(cnt),
+            "Purchase_Period_Months": int(months),
+            "Spending_Score": calculate_spending_score(float(spent), int(cnt), int(months)),
         })
 
 df = pd.DataFrame(rows).sample(frac=1, random_state=42).reset_index(drop=True)

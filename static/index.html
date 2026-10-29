@@ -22,6 +22,8 @@
       --accent: #7C83FD;
       --accent-dim: #565CBD;
       --danger: #FF6B6B;
+      --pop-up: #7C83FD;
+      --pop-down: #C9772C;
 
       --font-display: 'Space Grotesk', sans-serif;
       --font-body: 'Inter', sans-serif;
@@ -340,59 +342,6 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-    }
-
-    .how-it-works {
-      max-width: 1100px;
-      margin: 20px auto 80px;
-      padding: 0 clamp(20px, 5vw, 64px);
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    .step-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px;
-      transition: transform .25s ease, border-color .25s ease;
-    }
-
-    .step-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent-dim);
-    }
-
-    .step-num {
-      font-family: var(--font-mono);
-      color: var(--accent);
-      font-size: 0.78rem;
-      margin-bottom: 10px;
-    }
-
-    .step-title {
-      font-family: var(--font-display);
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .step-desc {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      line-height: 1.5;
-    }
-
-    @media (max-width: 860px) {
-      .how-it-works {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 520px) {
-      .how-it-works {
-        grid-template-columns: 1fr;
-      }
     }
 
     /* ---------- Auth ---------- */
@@ -1234,20 +1183,6 @@
       font-family: var(--font-mono);
     }
 
-    .metric-persona-name {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-      letter-spacing: -0.01em;
-    }
-
-    .metric-persona-stats {
-      font-size: 0.82rem;
-      color: var(--text-dim);
-      font-family: var(--font-mono);
-    }
-
     .admin-chart-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -1396,18 +1331,6 @@
       font-size: 0.87rem;
     }
 
-    .admin-overview-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    @media (max-width: 560px) {
-      .admin-overview-row {
-        grid-template-columns: 1fr;
-      }
-    }
-
     @media (max-width: 780px) {
       .admin-layout {
         flex-direction: column;
@@ -1450,7 +1373,7 @@
       }
     }
 
-    /* ---------- New analytics sections ---------- */
+    /* ---------- Admin analysis sections ---------- */
     .admin-metrics-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -1472,6 +1395,156 @@
     #adminProductsCanvas {
       width: 100%;
       display: block;
+    }
+
+    /* ── Ranked product list sections ──────────────────────────────────── */
+    .prank-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .prank-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .prank-title {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .prank-row {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 13px 24px;
+      border-bottom: 1px solid rgba(51, 55, 106, 0.45);
+      transition: background .15s ease;
+    }
+
+    .prank-row:last-child {
+      border-bottom: none;
+    }
+
+    .prank-row:hover {
+      background: rgba(124, 131, 253, 0.06);
+    }
+
+    .prank-num {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-faint);
+      width: 22px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    .prank-name {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--text);
+      flex: 1;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .prank-count {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Category table */
+    .pcat-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .pcat-table thead th {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      padding: 13px 24px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pcat-table thead th:last-child {
+      text-align: right;
+    }
+
+    .pcat-table tbody td {
+      padding: 12px 24px;
+      font-size: 0.88rem;
+      border-bottom: 1px solid rgba(51, 55, 106, 0.45);
+      vertical-align: middle;
+    }
+
+    .pcat-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .pcat-table tbody tr:hover td {
+      background: rgba(124, 131, 253, 0.06);
+    }
+
+    .pcat-name {
+      color: var(--text);
+      font-family: var(--font-body);
+      text-transform: capitalize;
+    }
+
+    .pcat-bar-cell {
+      width: 40%;
+    }
+
+    .pcat-bar-wrap {
+      height: 6px;
+      background: var(--surface-2);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .pcat-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+      border-radius: 99px;
+    }
+
+    .pcat-count {
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      text-align: right;
+    }
+
+    .pcat-footer td {
+      padding: 11px 24px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-faint);
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border) !important;
+    }
+
+    .prank-empty {
+      padding: 28px 24px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-dim);
     }
 
     /* Persona analysis table */
@@ -1612,6 +1685,539 @@
       color: var(--text);
       font-weight: 600;
     }
+
+    /* Segment–Product Affinity */
+    .affinity-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .affinity-select {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      max-width: 100%;
+    }
+
+    .affinity-select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(124, 131, 253, 0.18);
+      outline: none;
+    }
+
+    .affinity-summary {
+      padding: 14px 24px 0;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-faint);
+    }
+
+    .affinity-subtitle {
+      padding: 18px 24px 4px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    .affinity-product {
+      color: var(--text);
+    }
+
+    .affinity-table-wrap {
+      overflow-x: auto;
+    }
+
+    /* Business Intelligence Explorer */
+    .bie-tabs {
+      flex-wrap: wrap;
+      border-radius: 18px;
+      margin-bottom: 16px;
+    }
+
+    .bie-tabs .tab-btn {
+      flex: 1 1 160px;
+    }
+
+    .bie-panel .prank-box {
+      margin-bottom: 0;
+    }
+
+    .opp-insights {
+      padding: 4px 24px 0;
+    }
+
+    .opp-insight-row td {
+      padding-top: 0 !important;
+      font-size: 0.78rem !important;
+      color: var(--text-faint);
+      line-height: 1.45;
+    }
+
+    .opp-has-insight td {
+      border-bottom: none !important;
+    }
+
+    .opp-gap {
+      color: var(--accent) !important;
+    }
+
+    .opp-more {
+      padding: 10px 24px 18px;
+    }
+
+    /* Period-over-Period Analysis */
+    .pop-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pop-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 16px 24px 0;
+    }
+
+    @media (max-width: 700px) {
+      .pop-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pop-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px 12px;
+      min-width: 0;
+    }
+
+    .pop-card-title {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 10px;
+    }
+
+    .pop-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .pop-kpi-label {
+      font-size: 0.72rem;
+      color: var(--text-faint);
+    }
+
+    .pop-kpi-value {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .pop-kpi-value.pop-up { color: var(--pop-up); }
+    .pop-kpi-value.pop-down { color: var(--pop-down); }
+
+    .pop-chart {
+      width: 100%;
+      height: auto;
+      display: block;
+      overflow: visible;
+    }
+
+    .pop-chart text {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      fill: var(--text-faint);
+    }
+
+    .pop-chart .pop-line {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 2;
+    }
+
+    .pop-chart .pop-dot {
+      fill: var(--accent);
+      stroke: var(--bg-alt);
+      stroke-width: 2;
+    }
+
+    .pop-chart .pop-dot.pop-dot-dim {
+      fill: var(--accent-dim);
+    }
+
+    .pop-chart .pop-hit {
+      fill: transparent;
+    }
+
+    .pop-chart .pop-hit:hover + .pop-dot,
+    .pop-chart .pop-dot:hover {
+      stroke: var(--text);
+    }
+
+    .pop-diverge {
+      position: relative;
+      height: 8px;
+      background: var(--surface-2);
+      border-radius: 99px;
+      min-width: 90px;
+    }
+
+    .pop-diverge::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: -2px;
+      bottom: -2px;
+      width: 1px;
+      background: var(--text-faint);
+    }
+
+    .pop-diverge-fill {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      border-radius: 4px;
+    }
+
+    .pop-diverge-fill.pop-up { left: 50%; background: var(--pop-up); }
+    .pop-diverge-fill.pop-down { right: 50%; background: var(--pop-down); }
+
+    .pop-legend {
+      display: flex;
+      gap: 16px;
+      padding: 6px 24px 0;
+      font-size: 0.75rem;
+      color: var(--text-faint);
+    }
+
+    .pop-legend span::before {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      margin-right: 6px;
+      vertical-align: -1px;
+      background: var(--pop-up);
+    }
+
+    .pop-legend span.pop-legend-down::before {
+      background: var(--pop-down);
+    }
+
+    .pop-insights {
+      padding: 4px 24px 20px;
+    }
+
+    /* What-If Simulation */
+    .wi-form {
+      padding: 8px 24px 20px;
+    }
+
+    .wi-note {
+      font-size: 0.78rem;
+      color: var(--text-faint);
+      margin: -4px 0 14px;
+    }
+
+    .wi-persona {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .wi-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .wi-status {
+      margin: 14px 24px 0;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-alt);
+      font-size: 0.88rem;
+      color: var(--text-dim);
+    }
+
+    .wi-status strong {
+      color: var(--text);
+    }
+
+    .wi-lists {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 8px 24px 20px;
+    }
+
+    @media (max-width: 760px) {
+      .wi-lists {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .wi-list {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      min-width: 0;
+    }
+
+    .wi-list ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+
+    .wi-list li {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(51, 55, 106, 0.45);
+    }
+
+    .wi-list li:last-child {
+      border-bottom: none;
+    }
+
+    .wi-tag {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-left: 6px;
+    }
+
+    /* ── Customer Profile section ─────────────────────────────────────── */
+    .cp-section-title {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 36px 0 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .cp-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* full-width items inside the grid */
+    .cp-grid .cp-item--full {
+      grid-column: 1 / -1;
+    }
+
+    .cp-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      transition: border-color .25s ease, transform .25s ease;
+    }
+
+    .cp-item:hover {
+      border-color: var(--accent-dim);
+      transform: translateY(-2px);
+    }
+
+    .cp-item-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    /* Total customers — big number */
+    .cp-total-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .cp-total-bar-wrap {
+      flex: 1;
+      height: 6px;
+      background: var(--surface-2);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .cp-total-bar-fill {
+      height: 100%;
+      width: 80%;
+      /* decorative — always 80% */
+      background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+      border-radius: 99px;
+    }
+
+    .cp-total-num {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    /* Range rows (age / income) */
+    .cp-range-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+
+    .cp-range-track {
+      flex: 1;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+      border-radius: 99px;
+      position: relative;
+    }
+
+    .cp-range-dot {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+    }
+
+    .cp-range-dot--left {
+      left: 0;
+    }
+
+    .cp-range-dot--right {
+      right: 0;
+    }
+
+    .cp-range-lo {
+      color: var(--text-dim);
+    }
+
+    .cp-range-hi {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* Gender distribution */
+    .cp-gender-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cp-gender-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cp-gender-label {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      width: 52px;
+      flex-shrink: 0;
+    }
+
+    .cp-gender-bar-wrap {
+      flex: 1;
+      height: 8px;
+      background: var(--surface-2);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .cp-gender-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width .6s ease;
+    }
+
+    .cp-gender-bar-fill--male {
+      background: linear-gradient(90deg, #5B6CF9, #7C83FD);
+    }
+
+    .cp-gender-bar-fill--female {
+      background: linear-gradient(90deg, #C47CF9, #E07BFD);
+    }
+
+    .cp-gender-count {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+      width: 28px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* Most common persona */
+    .cp-persona-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .cp-persona-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .cp-persona-name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+    }
   </style>
 </head>
 
@@ -1641,7 +2247,7 @@
       <section class="screen active" id="landing">
         <div class="hero">
           <!-- <div class="eyebrow"><span class="dot"></span>K-Means Clustering</div> -->
-          <h1 class="hero-title">Every customer belongs<br>to a <span class="accent-word">cluster</span>.</h1>
+          <h1 class="hero-title">Understand Your Customers<br>Recommend Smarter.</h1>
           <!-- <p class="hero-sub">Enter a customer's profile and watch the model place them among the people they actually resemble — then get product recommendations built for that group, not the average shopper.</p> -->
           <div class="hero-actions">
             <button class="btn btn-primary" data-nav="predict">Run a prediction →</button>
@@ -1650,32 +2256,6 @@
           <div class="legend" id="legend"></div>
         </div>
 
-        <div class="how-it-works">
-          <div class="step-card">
-            <div class="step-num">INPUT</div>
-            <div class="step-title">Profile</div>
-            <div class="step-desc">Age, gender, annual income, and spending score — four signals, no forms to dread.
-            </div>
-          </div>
-          <div class="step-card">
-            <div class="step-num">MODEL</div>
-            <div class="step-title">K-Means</div>
-            <div class="step-desc">Trained on historical customers, the model assigns a cluster based on nearest
-              centroid.</div>
-          </div>
-          <div class="step-card">
-            <div class="step-num">MAPPING</div>
-            <div class="step-title">Persona</div>
-            <div class="step-desc">Each cluster is named and described, based on its real income/spending centroid.
-            </div>
-          </div>
-          <div class="step-card">
-            <div class="step-num">OUTPUT</div>
-            <div class="step-title">Recommendations</div>
-            <div class="step-desc">A short list of products curated for that persona's habits, not a generic catalog.
-            </div>
-          </div>
-        </div>
       </section>
 
       <!-- AUTH -->
@@ -1720,7 +2300,7 @@
       <section class="screen" id="predict">
         <div class="predict-wrap">
           <div class="form-title" style="font-size:1.8rem;">Customer profile</div>
-          <div class="form-sub" style="margin-bottom:32px;">These four values are all the model needs.</div>
+          <div class="form-sub" style="margin-bottom:32px;">Your spending score is calculated from your purchase history.</div>
           <div class="form-error" id="predictError"></div>
 
           <div class="form-grid">
@@ -1743,10 +2323,19 @@
             <input type="range" id="inIncome" min="1" max="240" value="40" />
           </div>
 
-          <div class="slider-row">
-            <div class="slider-label"><span>Spending score</span><span class="slider-value" id="spendVal">62</span>
+          <div class="form-grid">
+            <div class="field">
+              <label>Total amount spent (₹)</label>
+              <input type="number" id="inTotalSpent" value="60000" min="0" step="any" />
             </div>
-            <input type="range" id="inSpend" min="1" max="100" value="62" />
+            <div class="field">
+              <label>Number of purchases</label>
+              <input type="number" id="inPurchaseCount" value="30" min="0" step="1" />
+            </div>
+            <div class="field">
+              <label>Purchase period (months)</label>
+              <input type="number" id="inPurchasePeriod" value="6" min="1" max="120" step="1" />
+            </div>
           </div>
 
           <button class="btn btn-primary" style="width:100%; margin-top:12px;" id="predictSubmit">Predict my cluster
@@ -1828,7 +2417,7 @@
         <div class="admin-wrap">
           <div class="admin-header">
             <div class="admin-eyebrow">Admin Only</div>
-            <div class="admin-title">Analytics Dashboard</div>
+            <div class="admin-title">Admin Dashboard</div>
           </div>
 
           <!-- Access-denied overlay (shown to non-admins who reach this screen) -->
@@ -1841,7 +2430,7 @@
           </div>
 
           <!-- Loading state -->
-          <div id="adminLoading" class="admin-loading">Loading analytics…</div>
+          <div id="adminLoading" class="admin-loading">Loading admin data…</div>
 
           <!-- Dashboard content (shown only to admins) -->
           <div id="adminContent" class="admin-layout" style="display:none;">
@@ -1852,7 +2441,6 @@
                 <button class="admin-side-link active" data-admin-page="persona">Persona Analysis</button>
                 <button class="admin-side-link" data-admin-page="product">Product Analysis</button>
                 <button class="admin-side-link" data-admin-page="customer">Customer Statistics</button>
-                <button class="admin-side-link" data-admin-page="analytics">Analytics</button>
                 <button class="admin-side-link" data-admin-page="insights">Business Insights</button>
               </nav>
               <button class="admin-side-link admin-side-logout" id="adminSidebarLogout">Logout</button>
@@ -1896,12 +2484,38 @@
               <div class="admin-page" id="adminPageProduct">
                 <div class="admin-page-header">
                   <div class="admin-page-title">Product Analysis</div>
-                  <div class="admin-page-sub">Which products get recommended most often across all predictions.</div>
+                  <div class="admin-page-sub">Which products and categories get recommended most often across all
+                    predictions.</div>
                 </div>
 
-                <div class="admin-chart-card admin-section-gap">
-                  <div class="admin-chart-title">Most Recommended Products</div>
-                  <canvas id="adminProductsCanvas"></canvas>
+                <!-- TOP 20 MOST RECOMMENDED -->
+                <div class="prank-box admin-section-gap" id="prankTop20Box">
+                  <div class="prank-header">
+                    <div class="prank-title">Top 20 Most Recommended Products</div>
+                  </div>
+                  <div id="prankTop20List">
+                    <div class="prank-empty">No recommendation data yet.</div>
+                  </div>
+                </div>
+
+                <!-- 10 LEAST RECOMMENDED -->
+                <div class="prank-box admin-section-gap" id="prankBot10Box">
+                  <div class="prank-header">
+                    <div class="prank-title">10 Least Recommended Products</div>
+                  </div>
+                  <div id="prankBot10List">
+                    <div class="prank-empty">No recommendation data yet.</div>
+                  </div>
+                </div>
+
+                <!-- PRODUCT CATEGORY PERFORMANCE -->
+                <div class="prank-box" id="prankCatBox">
+                  <div class="prank-header">
+                    <div class="prank-title">Product Category Performance</div>
+                  </div>
+                  <div id="prankCatContent">
+                    <div class="prank-empty">No recommendation data yet.</div>
+                  </div>
                 </div>
               </div>
 
@@ -1929,27 +2543,81 @@
                     <div class="metric-sub">out of 100</div>
                   </div>
                 </div>
-              </div>
 
-              <!-- ANALYTICS (general overview) -->
-              <div class="admin-page" id="adminPageAnalytics">
-                <div class="admin-page-header">
-                  <div class="admin-page-title">Analytics</div>
-                  <div class="admin-page-sub">System-wide snapshot.</div>
-                </div>
+                <!-- CUSTOMER PROFILE -->
+                <div class="cp-section-title">Customer Profile</div>
 
-                <div class="admin-overview-row">
-                  <div class="metric-card">
-                    <div class="metric-label">Total Customers Analyzed</div>
-                    <div class="metric-value" id="adminTotal">—</div>
-                    <div class="metric-sub" id="adminTotalSub">predictions in database</div>
+                <div class="cp-grid">
+
+                  <!-- Total Customers -->
+                  <div class="cp-item">
+                    <div class="cp-item-label">Total Customers</div>
+                    <div class="cp-total-row">
+                      <div class="cp-total-bar-wrap">
+                        <div class="cp-total-bar-fill"></div>
+                      </div>
+                      <div class="cp-total-num" id="cpTotalCustomers">—</div>
+                    </div>
                   </div>
 
-                  <div class="metric-card">
-                    <div class="metric-label">Most Common Persona</div>
-                    <div class="metric-persona-name" id="adminTopPersona">—</div>
-                    <div class="metric-persona-stats" id="adminTopStats">— customers · —%</div>
+                  <!-- Most Common Persona -->
+                  <div class="cp-item">
+                    <div class="cp-item-label">Most Common Persona</div>
+                    <div class="cp-persona-badge">
+                      <div class="cp-persona-dot" id="cpPersonaDot"></div>
+                      <div class="cp-persona-name" id="cpPersonaName">—</div>
+                    </div>
                   </div>
+
+                  <!-- Age Range -->
+                  <div class="cp-item">
+                    <div class="cp-item-label">Age Range</div>
+                    <div class="cp-range-row">
+                      <span class="cp-range-lo" id="cpAgeMin">—</span>
+                      <div class="cp-range-track">
+                        <div class="cp-range-dot cp-range-dot--left"></div>
+                        <div class="cp-range-dot cp-range-dot--right"></div>
+                      </div>
+                      <span class="cp-range-hi" id="cpAgeMax">—</span>
+                    </div>
+                  </div>
+
+                  <!-- Income Range -->
+                  <div class="cp-item">
+                    <div class="cp-item-label">Income Range</div>
+                    <div class="cp-range-row">
+                      <span class="cp-range-lo" id="cpIncomeMin">—</span>
+                      <div class="cp-range-track">
+                        <div class="cp-range-dot cp-range-dot--left"></div>
+                        <div class="cp-range-dot cp-range-dot--right"></div>
+                      </div>
+                      <span class="cp-range-hi" id="cpIncomeMax">—</span>
+                    </div>
+                  </div>
+
+                  <!-- Gender Distribution (full-width) -->
+                  <div class="cp-item cp-item--full">
+                    <div class="cp-item-label">Gender Distribution</div>
+                    <div class="cp-gender-row">
+                      <div class="cp-gender-item">
+                        <span class="cp-gender-label">Male</span>
+                        <div class="cp-gender-bar-wrap">
+                          <div class="cp-gender-bar-fill cp-gender-bar-fill--male" id="cpMaleBar" style="width:0%">
+                          </div>
+                        </div>
+                        <span class="cp-gender-count" id="cpMaleCount">—</span>
+                      </div>
+                      <div class="cp-gender-item">
+                        <span class="cp-gender-label">Female</span>
+                        <div class="cp-gender-bar-wrap">
+                          <div class="cp-gender-bar-fill cp-gender-bar-fill--female" id="cpFemaleBar" style="width:0%">
+                          </div>
+                        </div>
+                        <span class="cp-gender-count" id="cpFemaleCount">—</span>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
 
@@ -1994,6 +2662,102 @@
 
                   </div>
                 </div>
+
+                <!-- BUSINESS INTELLIGENCE EXPLORER -->
+                <div class="bie" style="margin-top:28px;">
+                  <div class="tabs bie-tabs" role="tablist" aria-label="Business Intelligence Explorer">
+                    <button class="tab-btn active" data-bie="affinity" role="tab" aria-selected="true">Segment–Product Affinity</button>
+                    <button class="tab-btn" data-bie="opportunity" role="tab" aria-selected="false">Opportunity / Mismatch</button>
+                    <button class="tab-btn" data-bie="period" role="tab" aria-selected="false">Period-over-Period</button>
+                    <button class="tab-btn" data-bie="whatif" role="tab" aria-selected="false">What-If Simulation</button>
+                  </div>
+
+                  <!-- SEGMENT–PRODUCT AFFINITY -->
+                  <div class="bie-panel" id="biePanelAffinity">
+                    <div class="prank-box" id="affinityBox">
+                      <div class="prank-header affinity-header">
+                        <div class="prank-title">Segment–Product Affinity</div>
+                        <select class="affinity-select" id="affinityPersona" aria-label="Select persona" hidden></select>
+                      </div>
+                      <div id="affinityContent">
+                        <div class="prank-empty">No recommendation history available for affinity analysis.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- OPPORTUNITY / MISMATCH DETECTION -->
+                  <div class="bie-panel" id="biePanelOpportunity" hidden>
+                    <div class="prank-box">
+                      <div class="prank-header">
+                        <div class="prank-title">Opportunity / Mismatch Detection</div>
+                      </div>
+                      <div id="oppContent">
+                        <div class="prank-empty">Loading…</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- PERIOD-OVER-PERIOD ANALYSIS -->
+                  <div class="bie-panel" id="biePanelPeriod" hidden>
+                    <div class="prank-box">
+                      <div class="prank-header affinity-header">
+                        <div class="prank-title">Period-over-Period Analysis</div>
+                        <div class="pop-controls">
+                          <select class="affinity-select" id="popGranularity" aria-label="Period type">
+                            <option value="month">Monthly</option>
+                            <option value="week">Weekly</option>
+                          </select>
+                          <select class="affinity-select" id="popPeriod" aria-label="Period to compare" hidden></select>
+                        </div>
+                      </div>
+                      <div id="popContent">
+                        <div class="prank-empty">Loading…</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- WHAT-IF SIMULATION -->
+                  <div class="bie-panel" id="biePanelWhatif" hidden>
+                    <div class="prank-box">
+                      <div class="prank-header affinity-header">
+                        <div class="prank-title">What-If Simulation</div>
+                        <select class="affinity-select" id="wiCustomer" aria-label="Current customer">
+                          <option value="">No customer · simulate only</option>
+                        </select>
+                      </div>
+                      <div class="affinity-summary">Scenarios are temporary — nothing is saved to history.</div>
+
+                      <div id="wiCurrent"></div>
+
+                      <div class="affinity-subtitle">What-If Values</div>
+                      <div class="wi-form">
+                        <div class="form-error" id="wiError"></div>
+                        <div class="slider-row">
+                          <div class="slider-label"><span>Annual income</span><span class="slider-value" id="wiIncomeVal">—</span></div>
+                          <input type="range" id="wiIncome" min="1.2" max="240" step="0.1" value="40" />
+                        </div>
+                        <div class="form-grid">
+                          <div class="field">
+                            <label for="wiTotalSpent">Total amount spent (₹)</label>
+                            <input type="number" id="wiTotalSpent" value="60000" min="0" step="any" />
+                          </div>
+                          <div class="field">
+                            <label for="wiPurchaseCount">Number of purchases</label>
+                            <input type="number" id="wiPurchaseCount" value="30" min="0" step="1" />
+                          </div>
+                          <div class="field">
+                            <label for="wiPurchasePeriod">Purchase period (months)</label>
+                            <input type="number" id="wiPurchasePeriod" value="6" min="1" max="120" step="1" />
+                          </div>
+                        </div>
+                        <div class="wi-note" id="wiNote">Spending Score is calculated from these purchase values, exactly as in a real prediction.</div>
+                        <button class="btn btn-primary" style="width:100%;" id="wiRun">Run simulation</button>
+                      </div>
+
+                      <div id="wiResult"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
             </div>
@@ -2011,7 +2775,8 @@
       role: null,         // 'user' or 'admin'
       personas: {},       // filled from /api/personas
       lastResult: null,
-      adminData: null      // last-fetched /api/admin/stats payload
+      adminData: null,     // last-fetched /api/admin/stats payload
+      bieTab: 'affinity'   // selected Business Intelligence Explorer analysis
     };
 
     const API = {
@@ -2138,7 +2903,7 @@
 
       if (ok && data.success) {
         setLoggedInUI(data.username, data.role);
-        // Admin users land on the analytics dashboard; normal users on predict.
+        // Admin users land on Persona Analysis; normal users on predict.
         if (data.role === 'admin') {
           showScreen('admin');
         } else {
@@ -2174,9 +2939,7 @@
 
     // ---------------- Predict form ----------------
     const incomeSlider = document.getElementById('inIncome');
-    const spendSlider = document.getElementById('inSpend');
     const incomeVal = document.getElementById('incomeVal');
-    const spendVal = document.getElementById('spendVal');
 
     function fmtIncome(v) {
       // v = Annual_Income_k (USD thousands); display in Indian ₹ lakh/crore
@@ -2191,9 +2954,7 @@
       return '₹' + lakhs.toFixed(1) + 'L';
     }
     incomeSlider.addEventListener('input', () => incomeVal.textContent = fmtIncome(incomeSlider.value));
-    spendSlider.addEventListener('input', () => spendVal.textContent = spendSlider.value);
     incomeVal.textContent = fmtIncome(incomeSlider.value);
-    spendVal.textContent = spendSlider.value;
 
     const ICON_RULES = [
       [/phone|iphone/i, '📱'], [/laptop|macbook/i, '💻'], [/tv/i, '📺'],
@@ -2212,12 +2973,18 @@
       const age = parseInt(document.getElementById('inAge').value, 10) || 25;
       const gender = document.getElementById('inGender').value;
       const income = parseInt(incomeSlider.value, 10);
-      const spending_score = parseInt(spendSlider.value, 10);
+      const total_spent = parseFloat(document.getElementById('inTotalSpent').value);
+      const purchase_count = parseInt(document.getElementById('inPurchaseCount').value, 10);
+      const purchase_period = parseInt(document.getElementById('inPurchasePeriod').value, 10);
+      if (isNaN(total_spent) || isNaN(purchase_count) || isNaN(purchase_period)) {
+        showError('predictError', 'Please fill in total amount spent, number of purchases and purchase period.');
+        return;
+      }
 
       showScreen('processing');
       const [_, apiResult] = await Promise.all([
         runProcessingAnimation(),
-        API.post('/api/predict', { age, gender, income, spending_score })
+        API.post('/api/predict', { age, gender, income, total_spent, purchase_count, purchase_period })
       ]);
 
       if (apiResult.ok && apiResult.data.success) {
@@ -2412,7 +3179,6 @@
       persona: 'adminPagePersona',
       product: 'adminPageProduct',
       customer: 'adminPageCustomer',
-      analytics: 'adminPageAnalytics',
       insights: 'adminPageInsights'
     };
 
@@ -2426,7 +3192,7 @@
       // Redraw canvases for the now-visible page so they size against real width.
       if (state.adminData) {
         if (page === 'persona') renderPersonaDistributionChart(state.adminData);
-        if (page === 'product') renderProductsChart(state.adminData);
+        if (page === 'product') renderProductLists(state.adminData);
       }
     }
 
@@ -2436,7 +3202,7 @@
 
     document.getElementById('adminSidebarLogout').addEventListener('click', doLogout);
 
-    // ---------------- Admin analytics dashboard ----------------
+    // ---------------- Admin data ----------------
     async function loadAdminStats() {
       // Show loading state, hide content.
       document.getElementById('adminLoading').style.display = 'block';
@@ -2453,19 +3219,6 @@
 
       state.adminData = data;
 
-      // --- Existing: total predictions + most common persona ---
-      document.getElementById('adminTotal').textContent = data.total_predictions.toLocaleString();
-
-      const top = data.most_common_persona;
-      if (top) {
-        document.getElementById('adminTopPersona').textContent = top.persona;
-        document.getElementById('adminTopStats').textContent =
-          top.count.toLocaleString() + ' customers · ' + top.pct + '%';
-      } else {
-        document.getElementById('adminTopPersona').textContent = 'No data yet';
-        document.getElementById('adminTopStats').textContent = '—';
-      }
-
       // --- Existing: persona distribution bar chart ---
       renderPersonaDistributionChart(data);
 
@@ -2478,8 +3231,52 @@
       document.getElementById('adminAvgSpend').textContent =
         cs.avg_spending_score !== null && cs.avg_spending_score !== undefined ? cs.avg_spending_score : '—';
 
-      // --- New: Most recommended products bar chart ---
-      renderProductsChart(data);
+      // --- Customer Profile section ---
+      // Helper: convert income (k USD, same unit stored in DB) → ₹ label
+      function incomeToRs(kUsd) {
+        if (kUsd === null || kUsd === undefined) return '—';
+        // 1 k USD ≈ ₹83k  →  expressed as ₹ lakhs for readability
+        const lakh = kUsd * 83 / 100; // value in lakhs
+        if (lakh >= 100) return '₹' + (lakh / 100).toFixed(1) + 'Cr';
+        if (lakh >= 1) return '₹' + Math.round(lakh) + 'L';
+        return '₹' + Math.round(lakh * 100) + 'K';
+      }
+
+      // Total customers
+      document.getElementById('cpTotalCustomers').textContent =
+        cs.total !== undefined ? cs.total : '—';
+
+      // Age range
+      document.getElementById('cpAgeMin').textContent =
+        cs.min_age !== null && cs.min_age !== undefined ? cs.min_age : '—';
+      document.getElementById('cpAgeMax').textContent =
+        cs.max_age !== null && cs.max_age !== undefined ? cs.max_age : '—';
+
+      // Income range (₹)
+      document.getElementById('cpIncomeMin').textContent = incomeToRs(cs.min_income);
+      document.getElementById('cpIncomeMax').textContent = incomeToRs(cs.max_income);
+
+      // Gender distribution bars
+      const maleCount = cs.male_count !== undefined ? cs.male_count : 0;
+      const femaleCount = cs.female_count !== undefined ? cs.female_count : 0;
+      const genderTotal = maleCount + femaleCount || 1;
+      document.getElementById('cpMaleCount').textContent = maleCount;
+      document.getElementById('cpFemaleCount').textContent = femaleCount;
+      document.getElementById('cpMaleBar').style.width = Math.round(maleCount / genderTotal * 100) + '%';
+      document.getElementById('cpFemaleBar').style.width = Math.round(femaleCount / genderTotal * 100) + '%';
+
+      // Most common persona — reuse data.most_common_persona already computed above
+      const mcp = data.most_common_persona;
+      if (mcp) {
+        document.getElementById('cpPersonaName').textContent = mcp.persona || '—';
+        document.getElementById('cpPersonaDot').style.background = mcp.color || 'var(--accent)';
+      } else {
+        document.getElementById('cpPersonaName').textContent = 'No data yet';
+        document.getElementById('cpPersonaDot').style.background = 'var(--text-faint)';
+      }
+
+      // --- Product lists ---
+      renderProductLists(data);
 
       // --- New: Persona analysis table ---
       const paList = data.persona_analysis || [];
@@ -2544,6 +3341,10 @@
 
       // --- New: Business Insights (plain-language, data-driven) ---
       renderBusinessInsights(data.business_insights || {});
+      renderSegmentAffinity(data.segment_product_affinity || []);
+      if (state.bieTab === 'opportunity') loadOpportunities();
+      if (state.bieTab === 'period') loadPeriodAnalysis();
+      if (state.bieTab === 'whatif') loadWhatIfCustomers();
 
       document.getElementById('adminContent').style.display = 'flex';
     }
@@ -2612,78 +3413,87 @@
       });
     }
 
-    function renderProductsChart(data) {
-      const products = data.top_products || [];
-      const prodCanvas = document.getElementById('adminProductsCanvas');
-      if (products.length === 0) {
-        prodCanvas.style.display = 'none';
-        return;
+    function renderProductLists(data) {
+      const allProducts = data.top_products || [];
+      const catStats = data.product_category_stats || [];
+
+      // --- helper: build a ranked-row HTML string ---
+      function buildRows(items, labelKey, countKey, order) {
+        // order: 'desc' = already sorted highest first (top20)
+        //        'asc'  = reverse for bottom10 (lowest first)
+        const list = order === 'asc' ? [...items].reverse() : items;
+        if (list.length === 0)
+          return '<div class="prank-empty">No data yet.</div>';
+        return list.map((item, i) => {
+          const rank = String(i + 1).padStart(2, '0');
+          const n = item[labelKey];
+          const c = item[countKey];
+          const word = c === 1 ? 'recommendation' : 'recommendations';
+          return `<div class="prank-row">
+            <span class="prank-num">${rank}</span>
+            <span class="prank-name">${n}</span>
+            <span class="prank-count">${c} ${word}</span>
+          </div>`;
+        }).join('');
       }
 
-      const pBarH = 34;
-      const pLabelW = 210;
-      const pValueW = 50;
-      const pRowGap = 8;
-      const pChartH = products.length * (pBarH + pRowGap) + 20;
+      // Top 20 (server already returns top 20, sorted desc)
+      const top20 = allProducts.slice(0, 20);
+      document.getElementById('prankTop20List').innerHTML =
+        top20.length > 0
+          ? buildRows(top20, 'name', 'count', 'desc')
+          : '<div class="prank-empty">No recommendation data yet.</div>';
 
-      const dpr2 = window.devicePixelRatio || 1;
-      const pDisplayW = prodCanvas.offsetWidth || 600;
-      prodCanvas.width = pDisplayW * dpr2;
-      prodCanvas.height = pChartH * dpr2;
-      prodCanvas.style.height = pChartH + 'px';
+      // Bottom 10: server sends them ascending (lowest first = rank 01 is least recommended).
+      const bot10Src = data.bottom_products || [];
+      const bot10 = bot10Src.slice(0, 10);
+      document.getElementById('prankBot10List').innerHTML =
+        bot10.length > 0
+          ? buildRows(bot10, 'name', 'count', 'desc')
+          : '<div class="prank-empty">No recommendation data yet.</div>';
 
-      const pCtx = prodCanvas.getContext('2d');
-      pCtx.scale(dpr2, dpr2);
-
-      const pMaxCount = products[0].count;
-      const pBarAreaW = pDisplayW - pLabelW - pValueW - 16;
-
-      // Use a cycle of accent colors for products
-      const productColors = [
-        '#7C83FD', '#4ECDC4', '#FFD166', '#A78BFA', '#06D6A0',
-        '#F473B9', '#FF6B6B', '#82C91E', '#FFA94D', '#E599F7'
-      ];
-
-      products.forEach((item, i) => {
-        const py = i * (pBarH + pRowGap) + 10;
-        const pBarW = pMaxCount > 0 ? Math.round((item.count / pMaxCount) * pBarAreaW) : 0;
-        const color = productColors[i % productColors.length];
-
-        // Track
-        pCtx.fillStyle = 'rgba(255,255,255,0.04)';
-        pCtx.beginPath();
-        pCtx.roundRect(pLabelW, py + (pBarH - 20) / 2, pBarAreaW, 20, 5);
-        pCtx.fill();
-
-        // Bar
-        const pGrad = pCtx.createLinearGradient(pLabelW, 0, pLabelW + pBarW, 0);
-        pGrad.addColorStop(0, color);
-        pGrad.addColorStop(1, color + 'AA');
-        pCtx.fillStyle = pGrad;
-        pCtx.beginPath();
-        pCtx.roundRect(pLabelW, py + (pBarH - 20) / 2, Math.max(pBarW, 4), 20, 5);
-        pCtx.fill();
-
-        // Label (left) — truncate long product names
-        pCtx.fillStyle = '#9A9FC7';
-        pCtx.font = '500 11.5px Inter, sans-serif';
-        pCtx.textAlign = 'right';
-        pCtx.textBaseline = 'middle';
-        let pLabel = item.name;
-        if (pCtx.measureText(pLabel).width > pLabelW - 10) {
-          while (pCtx.measureText(pLabel + '…').width > pLabelW - 10 && pLabel.length > 0) {
-            pLabel = pLabel.slice(0, -1);
-          }
-          pLabel += '…';
-        }
-        pCtx.fillText(pLabel, pLabelW - 8, py + pBarH / 2);
-
-        // Count (right)
-        pCtx.fillStyle = '#F1F1FB';
-        pCtx.font = '600 11.5px JetBrains Mono, monospace';
-        pCtx.textAlign = 'left';
-        pCtx.fillText(item.count, pLabelW + pBarAreaW + 8, py + pBarH / 2);
+      // Category performance
+      if (catStats.length === 0) {
+        document.getElementById('prankCatContent').innerHTML =
+          '<div class="prank-empty">No recommendation data yet.</div>';
+        return;
+      }
+      const catMax = catStats[0].count;
+      let tableHTML = `
+        <table class="pcat-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th class="pcat-bar-cell"></th>
+              <th>Recommendations</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+      catStats.forEach(c => {
+        const pct = catMax > 0 ? Math.round(c.count / catMax * 100) : 0;
+        tableHTML += `
+          <tr>
+            <td class="pcat-name">${c.category}</td>
+            <td class="pcat-bar-cell">
+              <div class="pcat-bar-wrap">
+                <div class="pcat-bar-fill" style="width:${pct}%"></div>
+              </div>
+            </td>
+            <td class="pcat-count">${c.count}</td>
+          </tr>
+        `;
       });
+      tableHTML += `
+          </tbody>
+          <tfoot>
+            <tr class="pcat-footer">
+              <td colspan="3">Total Categories: ${catStats.length}</td>
+            </tr>
+          </tfoot>
+        </table>
+      `;
+      document.getElementById('prankCatContent').innerHTML = tableHTML;
     }
 
     function renderBusinessInsights(bi) {
@@ -2728,6 +3538,529 @@
       set('biIncomeLow', iLow
         ? `${iLow.persona} has the lowest average income (avg ${iLow.avg_income}k USD).`
         : 'Income data is not available.');
+    }
+
+    // ---------------- Segment–Product Affinity ----------------
+    // All values come from /api/admin/stats -> segment_product_affinity,
+    // computed server-side from stored recommendation history.
+    const AFFINITY_TOP_PRODUCTS = 10;
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, ch => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[ch]);
+    }
+
+    function affinityTable(items, labelHeader, labelFn, labelClass) {
+      const max = items.length ? items[0].count : 0;
+      const rows = items.map(item => {
+        const width = max > 0 ? Math.round(item.count / max * 100) : 0;
+        return `
+          <tr>
+            <td class="${labelClass}">${escapeHtml(labelFn(item))}</td>
+            <td class="pcat-bar-cell">
+              <div class="pcat-bar-wrap">
+                <div class="pcat-bar-fill" style="width:${width}%"></div>
+              </div>
+            </td>
+            <td class="pcat-count">${item.count}</td>
+            <td class="pcat-count">${item.share}%</td>
+          </tr>`;
+      }).join('');
+      return `
+        <div class="affinity-table-wrap">
+          <table class="pcat-table">
+            <thead>
+              <tr>
+                <th>${labelHeader}</th>
+                <th class="pcat-bar-cell"></th>
+                <th style="text-align:right;">Recommendations</th>
+                <th>Share</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>`;
+    }
+
+    function renderSegmentAffinity(affinity) {
+      const select = document.getElementById('affinityPersona');
+      const content = document.getElementById('affinityContent');
+
+      if (!affinity.length) {
+        select.hidden = true;
+        select.innerHTML = '';
+        content.innerHTML =
+          '<div class="prank-empty">No recommendation history available for affinity analysis.</div>';
+        return;
+      }
+
+      // Keep the current selection (by persona name) when stats reload.
+      const previous = select.selectedOptions[0] ? select.selectedOptions[0].textContent : null;
+      select.innerHTML = affinity.map((a, i) =>
+        `<option value="${i}">${escapeHtml(a.persona)}</option>`).join('');
+      const keep = affinity.findIndex(a => a.persona === previous);
+      select.value = String(keep >= 0 ? keep : 0);
+      select.hidden = false;
+
+      const draw = () => {
+        const seg = affinity[parseInt(select.value, 10)];
+        const topProducts = seg.products.slice(0, AFFINITY_TOP_PRODUCTS);
+        content.innerHTML = `
+          <div class="affinity-summary">
+            ${seg.predictions.toLocaleString()} ${seg.predictions === 1 ? 'prediction' : 'predictions'}
+            · ${seg.total_recommendations.toLocaleString()} total recommendations
+            · ${seg.products.length} distinct products
+          </div>
+          <div class="affinity-subtitle">Top ${topProducts.length} Recommended Products</div>
+          ${affinityTable(topProducts, 'Product', p => p.name, 'affinity-product')}
+          <div class="affinity-subtitle">Top Recommended Categories</div>
+          ${affinityTable(seg.categories, 'Category', c => c.category, 'pcat-name')}`;
+      };
+      select.onchange = draw;
+      draw();
+    }
+
+    // ---------------- Business Intelligence Explorer ----------------
+    const BIE_PANELS = {
+      affinity: 'biePanelAffinity',
+      opportunity: 'biePanelOpportunity',
+      period: 'biePanelPeriod',
+      whatif: 'biePanelWhatif'
+    };
+
+    function showBieTab(tab) {
+      state.bieTab = tab;
+      document.querySelectorAll('.bie-tabs .tab-btn').forEach(b => {
+        const active = b.dataset.bie === tab;
+        b.classList.toggle('active', active);
+        b.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      Object.entries(BIE_PANELS).forEach(([key, id]) => {
+        document.getElementById(id).hidden = key !== tab;
+      });
+      if (tab === 'opportunity') loadOpportunities();
+      if (tab === 'period') loadPeriodAnalysis();
+      if (tab === 'whatif') loadWhatIfCustomers();
+    }
+
+    document.querySelectorAll('.bie-tabs .tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => showBieTab(btn.dataset.bie));
+    });
+
+    // ---------------- Opportunity / Mismatch Detection ----------------
+    // All values come from /api/admin/opportunities, computed server-side
+    // from stored recommendation history (built on the affinity data).
+    const OPP_ROWS_COLLAPSED = 8;
+    const OPP_EMPTY = 'No significant recommendation gaps were found in the available history.';
+
+    async function loadOpportunities() {
+      const content = document.getElementById('oppContent');
+      const { ok, data } = await API.get('/api/admin/opportunities');
+      if (!ok || !data.success) {
+        content.innerHTML = `<div class="prank-empty">${escapeHtml(data.message || 'Could not load opportunity analysis.')}</div>`;
+        return;
+      }
+      renderOpportunities(data);
+    }
+
+    function gapTable(gaps, itemHeader, itemFn) {
+      const rows = list => list.map(g => `
+          <tr class="opp-has-insight">
+            <td class="affinity-product">${escapeHtml(g.persona)}</td>
+            <td class="affinity-product">${escapeHtml(itemFn(g))}</td>
+            <td class="pcat-count">${g.current_share}%</td>
+            <td class="pcat-count">${g.reference_share}%</td>
+            <td class="pcat-count opp-gap">${g.gap} pp</td>
+          </tr>
+          <tr class="opp-insight-row"><td colspan="5">${escapeHtml(g.insight)}</td></tr>`).join('');
+      const table = list => `
+        <div class="affinity-table-wrap">
+          <table class="pcat-table">
+            <thead>
+              <tr>
+                <th>Persona</th>
+                <th>${itemHeader}</th>
+                <th style="text-align:right;">Current Share</th>
+                <th style="text-align:right;">Reference Share</th>
+                <th>Gap</th>
+              </tr>
+            </thead>
+            <tbody>${rows(list)}</tbody>
+          </table>
+        </div>`;
+      const shown = gaps.slice(0, OPP_ROWS_COLLAPSED);
+      const wrap = document.createElement('div');
+      wrap.innerHTML = table(shown);
+      if (gaps.length > shown.length) {
+        const more = document.createElement('div');
+        more.className = 'opp-more';
+        more.innerHTML = `<button class="btn btn-ghost btn-sm">Show all ${gaps.length}</button>`;
+        more.querySelector('button').addEventListener('click', () => {
+          wrap.innerHTML = table(gaps);
+        });
+        wrap.appendChild(more);
+      }
+      return wrap;
+    }
+
+    function renderOpportunities(data) {
+      const content = document.getElementById('oppContent');
+      const volume = data.volume || [];
+      const catGaps = data.category_gaps || [];
+      const prodGaps = data.product_gaps || [];
+
+      if (!volume.length) {
+        content.innerHTML = `<div class="prank-empty">${OPP_EMPTY}</div>`;
+        return;
+      }
+
+      const catCount = {}, prodCount = {};
+      catGaps.forEach(g => catCount[g.persona] = (catCount[g.persona] || 0) + 1);
+      prodGaps.forEach(g => prodCount[g.persona] = (prodCount[g.persona] || 0) + 1);
+
+      const volumeRows = volume.map(v => `
+          <tr>
+            <td class="affinity-product">${escapeHtml(v.persona)}</td>
+            <td class="pcat-count">${v.total_recommendations.toLocaleString()}</td>
+            <td class="pcat-count">${v.unique_products}</td>
+            <td class="pcat-count">${v.unique_categories}</td>
+            <td class="pcat-count">${catCount[v.persona] || 0} / ${prodCount[v.persona] || 0}</td>
+          </tr>`).join('');
+
+      const keyInsights = catGaps.slice(0, 3)
+        .map(g => `<div class="bi-item">💡 ${escapeHtml(g.insight)}</div>`).join('');
+
+      content.innerHTML = `
+        <div class="affinity-summary">
+          ${volume.length} personas compared · ${catGaps.length} category gaps · ${prodGaps.length} product gaps
+        </div>
+        <div class="affinity-subtitle">Key Opportunities</div>
+        <div class="opp-insights">${keyInsights || `<div class="bi-item">${OPP_EMPTY}</div>`}</div>
+        <div class="affinity-subtitle">Recommendation Gaps by Persona</div>
+        <div class="affinity-table-wrap">
+          <table class="pcat-table">
+            <thead>
+              <tr>
+                <th>Persona</th>
+                <th style="text-align:right;">Recommendations</th>
+                <th style="text-align:right;">Unique Products</th>
+                <th style="text-align:right;">Unique Categories</th>
+                <th>Category / Product Gaps</th>
+              </tr>
+            </thead>
+            <tbody>${volumeRows}</tbody>
+          </table>
+        </div>
+        <div class="affinity-subtitle">Category Opportunities · share of persona's recommendations</div>
+        <div id="oppCatTable"></div>
+        <div class="affinity-subtitle">Product Opportunities · share of persona's predictions</div>
+        <div id="oppProdTable"></div>`;
+
+      const catHost = document.getElementById('oppCatTable');
+      const prodHost = document.getElementById('oppProdTable');
+      if (catGaps.length) catHost.appendChild(gapTable(catGaps, 'Category', g => g.category));
+      else catHost.innerHTML = `<div class="prank-empty">${OPP_EMPTY}</div>`;
+      if (prodGaps.length) prodHost.appendChild(gapTable(prodGaps, 'Product', g => g.product + (g.category ? ' (' + g.category + ')' : '')));
+      else prodHost.innerHTML = `<div class="prank-empty">${OPP_EMPTY}</div>`;
+    }
+
+    // ---------------- Period-over-Period Analysis ----------------
+    // All values come from /api/admin/period-analysis, computed server-side
+    // by grouping stored history rows on their saved date.
+    const popGranularity = document.getElementById('popGranularity');
+    const popPeriod = document.getElementById('popPeriod');
+
+    async function loadPeriodAnalysis() {
+      const content = document.getElementById('popContent');
+      const params = new URLSearchParams({ granularity: popGranularity.value });
+      if (popPeriod.value) params.set('period', popPeriod.value);
+      const { ok, data } = await API.get('/api/admin/period-analysis?' + params);
+      if (!ok || !data.success) {
+        content.innerHTML = `<div class="prank-empty">${escapeHtml(data.message || 'Could not load period analysis.')}</div>`;
+        return;
+      }
+      renderPeriodAnalysis(data);
+    }
+
+    popGranularity.addEventListener('change', () => {
+      popPeriod.value = '';
+      popPeriod.innerHTML = '';
+      loadPeriodAnalysis();
+    });
+    popPeriod.addEventListener('change', loadPeriodAnalysis);
+
+    function fmtSigned(v, suffix) {
+      if (v === null || v === undefined) return '—';
+      return (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v) + suffix;
+    }
+
+    function trendClass(v) {
+      return v > 0 ? 'pop-up' : v < 0 ? 'pop-down' : '';
+    }
+
+    // Single-series line chart (one y-axis). Selected and previous periods
+    // get solid markers; every point has a hover tooltip.
+    function popLineChart(series, valueKey, unit, currentKey, previousKey) {
+      const pts = series.filter(p => p[valueKey] !== null && p[valueKey] !== undefined);
+      if (pts.length < 2) return '';
+      const W = 300, H = 96, padL = 26, padR = 8, padT = 12, padB = 18;
+      const vals = pts.map(p => p[valueKey]);
+      const lo = Math.min(0, ...vals), hi = Math.max(...vals) || 1;
+      const x = i => padL + (W - padL - padR) * (pts.length === 1 ? 0.5 : i / (pts.length - 1));
+      const y = v => padT + (H - padT - padB) * (1 - (v - lo) / (hi - lo || 1));
+      const path = pts.map((p, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(p[valueKey]).toFixed(1)).join(' ');
+      const dots = pts.map((p, i) => {
+        const marked = p.key === currentKey || p.key === previousKey;
+        const tip = `${escapeHtml(p.label)}: ${p[valueKey]}${unit}`;
+        return `<g><title>${tip}</title>
+          <circle class="pop-hit" cx="${x(i)}" cy="${y(p[valueKey])}" r="10"></circle>
+          <circle class="pop-dot${marked ? '' : ' pop-dot-dim'}" cx="${x(i)}" cy="${y(p[valueKey])}" r="${marked ? 4.5 : 3}"></circle></g>`;
+      }).join('');
+      const first = pts[0], last = pts[pts.length - 1];
+      return `
+        <svg class="pop-chart" viewBox="0 0 ${W} ${H}" role="img"
+             aria-label="${escapeHtml(pts.map(p => p.label + ' ' + p[valueKey] + unit).join(', '))}">
+          <line x1="${padL}" x2="${W - padR}" y1="${y(lo)}" y2="${y(lo)}" stroke="var(--border)" stroke-width="1"></line>
+          <text x="${padL - 4}" y="${y(hi) + 3}" text-anchor="end">${hi}</text>
+          <text x="${padL - 4}" y="${y(lo) + 3}" text-anchor="end">${lo}</text>
+          <path class="pop-line" d="${path}"></path>
+          ${dots}
+          <text x="${padL}" y="${H - 3}" text-anchor="start">${escapeHtml(first.label)}</text>
+          <text x="${W - padR}" y="${H - 3}" text-anchor="end">${escapeHtml(last.label)}</text>
+        </svg>`;
+    }
+
+    function popDiverge(change, maxAbs) {
+      const w = maxAbs > 0 ? Math.min(50, Math.abs(change) / maxAbs * 50) : 0;
+      return `<div class="pop-diverge" title="${fmtSigned(change, ' pp')}">
+        <div class="pop-diverge-fill ${trendClass(change)}" style="width:${w}%"></div></div>`;
+    }
+
+    function popChangeTable(rows, labelHeader, labelFn, labelClass, withCounts) {
+      if (!rows.length) return '<div class="prank-empty">No data for these periods.</div>';
+      const maxAbs = Math.max(...rows.map(r => Math.abs(r.share_change)));
+      const body = rows.map(r => `
+          <tr>
+            <td class="${labelClass}">${escapeHtml(labelFn(r))}</td>
+            ${withCounts ? `<td class="pcat-count">${r.previous_count} → ${r.current_count}</td>
+            <td class="pcat-count">${r.count_pct_change === null ? 'new' : fmtSigned(r.count_pct_change, '%')}</td>` : ''}
+            <td class="pcat-count">${r.previous_share}% → ${r.current_share}%</td>
+            <td class="pcat-bar-cell">${popDiverge(r.share_change, maxAbs)}</td>
+            <td class="pcat-count">${fmtSigned(r.share_change, ' pp')}</td>
+          </tr>`).join('');
+      return `
+        <div class="affinity-table-wrap">
+          <table class="pcat-table">
+            <thead>
+              <tr>
+                <th>${labelHeader}</th>
+                ${withCounts ? '<th style="text-align:right;">Count</th><th style="text-align:right;">Count Change</th>' : ''}
+                <th style="text-align:right;">Share</th>
+                <th class="pcat-bar-cell"></th>
+                <th>Share Change</th>
+              </tr>
+            </thead>
+            <tbody>${body}</tbody>
+          </table>
+        </div>`;
+    }
+
+    function renderPeriodAnalysis(data) {
+      const content = document.getElementById('popContent');
+      const periods = data.periods || [];
+
+      if (!data.sufficient) {
+        popPeriod.hidden = true;
+        const found = periods.length
+          ? ` Stored history currently covers only ${escapeHtml(periods.map(p => p.label).join(', '))}.`
+          : '';
+        content.innerHTML = `<div class="prank-empty">${escapeHtml(data.message)}${found}</div>`;
+        return;
+      }
+
+      // Selectable periods: every period that has an earlier period to compare with.
+      popPeriod.innerHTML = periods.slice(1).reverse().map(p =>
+        `<option value="${escapeHtml(p.key)}">${escapeHtml(p.label)} vs previous</option>`).join('');
+      popPeriod.value = data.current.key;
+      popPeriod.hidden = false;
+
+      const cur = data.current, prev = data.previous, v = data.volume, sp = data.spending;
+      const curLabel = escapeHtml(cur.label) + (cur.in_progress ? ' (in progress)' : '');
+
+      content.innerHTML = `
+        <div class="affinity-summary">${curLabel} compared with ${escapeHtml(prev.label)}</div>
+        <div class="pop-cards">
+          <div class="pop-card">
+            <div class="pop-card-title">Customer Analysis Trend</div>
+            <div class="pop-kpis">
+              <div><div class="pop-kpi-label">Current</div><div class="pop-kpi-value">${v.current}</div></div>
+              <div><div class="pop-kpi-label">Previous</div><div class="pop-kpi-value">${v.previous}</div></div>
+              <div><div class="pop-kpi-label">Change</div>
+                <div class="pop-kpi-value ${trendClass(v.change)}">${fmtSigned(v.pct_change, '%')}</div></div>
+            </div>
+            ${popLineChart(periods, 'predictions', ' analyses', cur.key, prev.key)}
+          </div>
+          <div class="pop-card">
+            <div class="pop-card-title">Spending Score Trend</div>
+            <div class="pop-kpis">
+              <div><div class="pop-kpi-label">Current avg</div><div class="pop-kpi-value">${sp.current ?? '—'}</div></div>
+              <div><div class="pop-kpi-label">Previous avg</div><div class="pop-kpi-value">${sp.previous ?? '—'}</div></div>
+              <div><div class="pop-kpi-label">Change</div>
+                <div class="pop-kpi-value ${trendClass(sp.change)}">${fmtSigned(sp.change, ' pts')}</div></div>
+            </div>
+            ${popLineChart(periods, 'avg_spending_score', ' avg score', cur.key, prev.key)}
+          </div>
+        </div>
+        <div class="pop-legend"><span>Increase</span><span class="pop-legend-down">Decrease</span></div>
+        <div class="affinity-subtitle">Persona Changes · share of analyzed customers</div>
+        ${popChangeTable(data.persona_changes || [], 'Persona', r => r.persona, 'affinity-product', true)}
+        <div class="affinity-subtitle">Recommendation Trends · categories</div>
+        ${popChangeTable(data.category_changes || [], 'Category', r => r.category, 'pcat-name', true)}
+        <div class="affinity-subtitle">Recommendation Trends · top ${(data.product_changes || []).length} product changes (share of analyses)</div>
+        ${popChangeTable(data.product_changes || [], 'Product', r => r.product, 'affinity-product', true)}
+        <div class="affinity-subtitle">Business Insights</div>
+        <div class="pop-insights">
+          ${(data.insights || []).map(i => `<div class="bi-item">💡 ${escapeHtml(i)}</div>`).join('')}
+        </div>`;
+    }
+
+    // ---------------- What-If Simulation ----------------
+    // Runs /api/admin/whatif, which reuses the real prediction pipeline
+    // (spending_score.py -> scaler -> K-Means -> persona -> recommender)
+    // and never writes to history.
+    const wiCustomer = document.getElementById('wiCustomer');
+    const wiIncome = document.getElementById('wiIncome');
+    const wiIncomeVal = document.getElementById('wiIncomeVal');
+    let wiCustomers = [];
+
+    wiIncome.addEventListener('input', () => wiIncomeVal.textContent = fmtIncome(wiIncome.value));
+    wiIncomeVal.textContent = fmtIncome(wiIncome.value);
+
+    async function loadWhatIfCustomers() {
+      const { ok, data } = await API.get('/api/admin/whatif/customers');
+      if (!ok || !data.success) return;
+      wiCustomers = data.customers || [];
+      const selected = wiCustomer.value;
+      wiCustomer.innerHTML = '<option value="">No customer · simulate only</option>' +
+        wiCustomers.map(c => `<option value="${c.id}">#${c.id} · ${escapeHtml(c.username)} · ${escapeHtml(c.persona || '—')} · ${escapeHtml((c.date || '').slice(0, 10))}</option>`).join('');
+      wiCustomer.value = wiCustomers.some(c => String(c.id) === selected) ? selected : '';
+      renderWhatIfCurrent();
+    }
+
+    function wiProfileCard(title, income, score, persona, color, extra) {
+      return `
+        <div class="pop-card">
+          <div class="pop-card-title">${title}</div>
+          <div class="pop-kpis" style="grid-template-columns:1fr 1fr;">
+            <div><div class="pop-kpi-label">Income</div><div class="pop-kpi-value">${fmtIncome(income)}</div></div>
+            <div><div class="pop-kpi-label">Spending Score</div><div class="pop-kpi-value">${score}</div></div>
+          </div>
+          <div class="pop-kpi-label">Persona</div>
+          <div class="wi-persona"><span class="wi-dot" style="background:${color || 'var(--text-faint)'}"></span>${escapeHtml(persona || '—')}</div>
+          ${extra || ''}
+        </div>`;
+    }
+
+    function renderWhatIfCurrent() {
+      const host = document.getElementById('wiCurrent');
+      const note = document.getElementById('wiNote');
+      const c = wiCustomers.find(x => String(x.id) === wiCustomer.value);
+      document.getElementById('wiResult').innerHTML = '';
+      if (!c) {
+        host.innerHTML = '';
+        note.textContent = 'Spending Score is calculated from these purchase values, exactly as in a real prediction.';
+        return;
+      }
+      wiIncome.value = c.income;
+      wiIncomeVal.textContent = fmtIncome(wiIncome.value);
+      note.textContent = 'Income is prefilled from this customer. Purchase totals are not stored in history, ' +
+        'so enter the purchase behaviour to simulate — Spending Score is calculated from it.';
+      const color = (Object.values(state.personas).find(p => p.persona === c.persona) || {}).color;
+      host.innerHTML = `
+        <div class="affinity-subtitle">Current Profile · as recorded ${escapeHtml((c.date || '').slice(0, 10))}</div>
+        <div class="pop-cards" style="padding-top:0;">
+          ${wiProfileCard('Customer #' + c.id + ' · ' + escapeHtml(c.username), c.income, c.spending_score, c.persona, color)}
+        </div>`;
+    }
+
+    wiCustomer.addEventListener('change', renderWhatIfCurrent);
+
+    function wiList(title, items) {
+      const body = items.length
+        ? items.map(p => `<li>${escapeHtml(p.name)}${p.tier === 'top' ? '<span class="wi-tag">top pick</span>' : ''}</li>`).join('')
+        : '<li>None</li>';
+      return `<div class="wi-list"><div class="pop-card-title">${title} (${items.length})</div><ul>${body}</ul></div>`;
+    }
+
+    document.getElementById('wiRun').addEventListener('click', async () => {
+      hideError('wiError');
+      const income = parseFloat(wiIncome.value);
+      const totalRaw = document.getElementById('wiTotalSpent').value;
+      const countRaw = document.getElementById('wiPurchaseCount').value;
+      const periodRaw = document.getElementById('wiPurchasePeriod').value;
+      const total_spent = Number(totalRaw);
+      const purchase_count = Number(countRaw);
+      const purchase_period = Number(periodRaw);
+
+      let error = null;
+      if (!(income > 0)) error = 'Annual income must be positive.';
+      else if (totalRaw === '' || isNaN(total_spent) || total_spent < 0) error = 'Total amount spent must be zero or more.';
+      else if (countRaw === '' || !Number.isInteger(purchase_count) || purchase_count < 0) error = 'Number of purchases must be a whole number, zero or more.';
+      else if (periodRaw === '' || !Number.isInteger(purchase_period) || purchase_period <= 0) error = 'Purchase period must be a whole number of months greater than zero.';
+      if (error) { showError('wiError', error); return; }
+
+      const body = { income, total_spent, purchase_count, purchase_period };
+      if (wiCustomer.value) body.history_id = parseInt(wiCustomer.value, 10);
+      const { ok, data } = await API.post('/api/admin/whatif', body);
+      if (!ok || !data.success) {
+        showError('wiError', data.message || 'Simulation failed.');
+        return;
+      }
+      renderWhatIfResult(data);
+    });
+
+    function renderWhatIfResult(data) {
+      const host = document.getElementById('wiResult');
+      const cur = data.current, sim = data.simulated;
+      const simCard = wiProfileCard('Simulated Profile', sim.income, sim.spending_score, sim.persona, sim.color,
+        `<div class="wi-note" style="margin:10px 0 0;">${escapeHtml(sim.description || '')}</div>`);
+
+      if (!cur) {
+        host.innerHTML = `
+          <div class="affinity-subtitle">Simulation Result</div>
+          <div class="pop-cards" style="padding-top:0;">${simCard}</div>
+          <div class="affinity-subtitle">Simulated Recommendations</div>
+          <div class="wi-lists" style="grid-template-columns:1fr;">${wiList('Recommended', sim.products)}</div>`;
+        return;
+      }
+
+      const notes = [];
+      if (cur.stored_persona && cur.stored_persona !== cur.persona) {
+        notes.push(`This customer was recorded as ${cur.stored_persona}; the current model places the same income and score in ${cur.persona}.`);
+      }
+      if (cur.stored_recommendation_count && cur.stored_recommendations_matching !== cur.stored_recommendation_count) {
+        notes.push(`${cur.stored_recommendations_matching} of the ${cur.stored_recommendation_count} recommendations saved with this record are still given for the same profile today, so the current profile is recalculated with the current model for a like-for-like comparison.`);
+      }
+      const rc = data.recommendation_changes;
+      const status = data.persona_changed
+        ? `<strong>Persona changed:</strong> ${escapeHtml(cur.persona)} → ${escapeHtml(sim.persona)}`
+        : `<strong>Persona unchanged:</strong> ${escapeHtml(sim.persona)}`;
+
+      host.innerHTML = `
+        <div class="affinity-subtitle">Simulation Result</div>
+        <div class="pop-cards" style="padding-top:0;">
+          ${wiProfileCard('Current Profile', cur.income, cur.spending_score, cur.persona, cur.color)}
+          ${simCard}
+        </div>
+        <div class="wi-status">${status} · Spending Score ${cur.spending_score} → ${sim.spending_score}</div>
+        ${notes.map(n => `<div class="wi-note" style="margin:8px 24px 0;">${escapeHtml(n)}</div>`).join('')}
+        <div class="affinity-subtitle">Recommendation Impact</div>
+        <div class="wi-lists">
+          ${wiList('New Recommendations', rc.new)}
+          ${wiList('No Longer Recommended', rc.removed)}
+          ${wiList('Still Recommended', rc.still)}
+        </div>`;
     }
 
     // ---------------- Ambient background particle field ----------------

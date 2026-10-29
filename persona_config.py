@@ -8,67 +8,67 @@ which scores products from data/products.csv against the customer's
 actual income/spending level using the thresholds below.
 """
 
-INCOME_LOW_MAX = 32.4
-INCOME_HIGH_MIN = 146.2
-SPEND_LOW_MAX = 28.7
-SPEND_HIGH_MIN = 68.3
+INCOME_LOW_MAX = 32.6
+INCOME_HIGH_MIN = 151.2
+SPEND_LOW_MAX = 25.5
+SPEND_HIGH_MIN = 68.1
 
 PERSONA_MAP = {
     0: {
-        "persona": 'Premium High-Spender',
-        "description": 'High income and high spending on premium products.',
-        "income_level": 'high',
-        "spend_level": 'high',
-        "color": '#FF6B6B',
-        "centroid": {'x': 78.9, 'y': 10.0},
-    },
-    1: {
-        "persona": 'Value-Focused Spender',
-        "description": 'Limited income with moderate spending focused on selected purchases.',
-        "income_level": 'low',
-        "spend_level": 'mid',
-        "color": '#4ECDC4',
-        "centroid": {'x': 10.0, 'y': 49.2},
-    },
-    2: {
-        "persona": 'Frugal High-Earner',
-        "description": 'High income but cautious with spending; buys selectively.',
-        "income_level": 'high',
-        "spend_level": 'low',
-        "color": '#FFD166',
-        "centroid": {'x': 85.3, 'y': 88.7},
-    },
-    3: {
-        "persona": 'Cautious Saver',
-        "description": 'Comfortable income, but spends carefully.',
-        "income_level": 'mid',
-        "spend_level": 'low',
-        "color": '#A78BFA',
-        "centroid": {'x': 37.3, 'y': 89.7},
-    },
-    4: {
         "persona": 'Enthusiastic Spender',
         "description": 'Modest income, but spends enthusiastically and often.',
         "income_level": 'low',
         "spend_level": 'high',
-        "color": '#06D6A0',
-        "centroid": {'x': 10.3, 'y': 11.5},
+        "color": '#FF6B6B',
+        "centroid": {'x': 10.5, 'y': 11.6},
     },
-    5: {
+    1: {
+        "persona": 'Cautious Saver',
+        "description": 'Comfortable income, but spends carefully.',
+        "income_level": 'mid',
+        "spend_level": 'low',
+        "color": '#4ECDC4',
+        "centroid": {'x': 37.4, 'y': 89.7},
+    },
+    2: {
         "persona": 'Steady High-Income Spender',
         "description": 'High income with steady, considered spending habits.',
         "income_level": 'high',
         "spend_level": 'mid',
-        "color": '#F473B9',
-        "centroid": {'x': 84.0, 'y': 49.7},
+        "color": '#FFD166',
+        "centroid": {'x': 84.3, 'y': 51.4},
     },
-    6: {
+    3: {
         "persona": 'Balanced Spender',
         "description": 'Moderate income and moderate spending; a balanced shopper.',
         "income_level": 'mid',
         "spend_level": 'mid',
+        "color": '#A78BFA',
+        "centroid": {'x': 37.2, 'y': 50.5},
+    },
+    4: {
+        "persona": 'Premium High-Spender',
+        "description": 'High income and high spending on premium products.',
+        "income_level": 'high',
+        "spend_level": 'high',
+        "color": '#06D6A0',
+        "centroid": {'x': 90.0, 'y': 10.0},
+    },
+    5: {
+        "persona": 'Value-Focused Spender',
+        "description": 'Limited income with moderate spending focused on selected purchases.',
+        "income_level": 'low',
+        "spend_level": 'mid',
+        "color": '#F473B9',
+        "centroid": {'x': 10.0, 'y': 51.8},
+    },
+    6: {
+        "persona": 'Frugal High-Earner',
+        "description": 'High income but cautious with spending; buys selectively.',
+        "income_level": 'high',
+        "spend_level": 'low',
         "color": '#4D96FF',
-        "centroid": {'x': 37.6, 'y': 49.1},
+        "centroid": {'x': 83.3, 'y': 90.0},
     },
     7: {
         "persona": 'Budget-Conscious Customer',
@@ -76,7 +76,7 @@ PERSONA_MAP = {
         "income_level": 'low',
         "spend_level": 'low',
         "color": '#FFA94D',
-        "centroid": {'x': 10.1, 'y': 90.0},
+        "centroid": {'x': 10.4, 'y': 89.2},
     },
     8: {
         "persona": 'Active Spender',
@@ -84,7 +84,7 @@ PERSONA_MAP = {
         "income_level": 'mid',
         "spend_level": 'high',
         "color": '#82C91E',
-        "centroid": {'x': 38.0, 'y': 11.5},
+        "centroid": {'x': 37.6, 'y': 13.1},
     },
     9: {
         "persona": 'Premium High-Spender #2',
@@ -92,6 +92,6 @@ PERSONA_MAP = {
         "income_level": 'high',
         "spend_level": 'high',
         "color": '#E599F7',
-        "centroid": {'x': 90.0, 'y': 14.4},
+        "centroid": {'x': 78.5, 'y': 12.9},
     },
 }

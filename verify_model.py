@@ -1,21 +1,3 @@
-"""
-verify_model.py
-Post-training accuracy verification for the K-Means customer segmentation model.
-
-Tests a set of hand-crafted (income, spending_score) pairs against the trained
-model and asserts that each prediction is consistent with the expected income
-and spending bucket — i.e., the cluster's persona_config entry must report
-the correct income_level and spend_level.
-
-Run AFTER train_model.py:
-    python verify_model.py
-
-Income scale: Annual_Income_k (USD thousands)
-  low   :   1.2 –  40  ($k)  ≈  ₹1L – ₹33L
-  mid   :  40   – 120  ($k)  ≈  ₹33L – ₹1Cr
-  high  : 120   – 240  ($k)  ≈  ₹1Cr – ₹2Cr
-"""
-
 import sys
 import joblib
 import numpy as np

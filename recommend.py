@@ -1,27 +1,3 @@
-"""
-recommend.py
-Product recommendation engine.
-
-Products are NOT hardcoded per persona in Python. They live in
-data/products.csv, each tagged with an income_level, spend_level, and
-price_range. This module:
-
-  1. Classifies a live customer's actual income/spending into the same
-     low/mid/high buckets used during training (persona_config thresholds).
-  2. Scores every product by how close it is to the customer's ACTUAL
-     income/spending value (not just "same bucket, random pick") -- so
-     recommendations are ranked, not shuffled.
-  3. Attaches a short human-readable reason for each recommendation.
-  4. Splits results into a "top" tier (best matches, diversified across
-     categories so it doesn't feel like a random dump of one category)
-     and a "more" tier (everything else, still relevant).
-
-Income scale: Annual_Income_k (USD thousands)
-  low  =  $1k –  $40k  (≈ ₹1L  – ₹33L)
-  mid  = $40k – $120k  (≈ ₹33L – ₹1Cr)
-  high = $120k – $240k (≈ ₹1Cr – ₹2Cr)
-"""
-
 import pandas as pd
 
 from persona_config import INCOME_LOW_MAX, INCOME_HIGH_MIN, SPEND_LOW_MAX, SPEND_HIGH_MIN

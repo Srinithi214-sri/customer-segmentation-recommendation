@@ -1,16 +1,10 @@
 """
-generate_products.py
-Generates a rich product catalog (~70 products per income×spend bucket).
-Outputs data/products.csv with columns:
-  product_id, name, category, income_level, spend_level, price_range
-
 Income levels:  low = ₹1L–₹8L  ($1k–$40k)
                 mid = ₹8L–₹25L  ($40k–$120k)
                 high = ₹25L–₹2Cr ($120k–$240k)
 
 Spend levels:  low / mid / high (spending score 1–100)
 
-Run:  python generate_products.py
 """
 
 import csv
